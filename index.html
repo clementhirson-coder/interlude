@@ -256,7 +256,7 @@ body.chover .cur-ring[data-label]::after{opacity:1}
 .series-panels-head p{max-width:36ch;font-family:var(--mono);font-size:11px;line-height:1.7;color:var(--dim)}
 
 .serie-panel{
-  position:relative;height:90vh;min-height:520px;
+  display:block;position:relative;height:90vh;min-height:520px;
   overflow:hidden;margin-bottom:3px;
 }
 .serie-panel-img{position:absolute;inset:0}
@@ -417,27 +417,27 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
 
 <!-- ── Photo trio ─────────────────────────────── -->
 <section id="index" class="photo-trio">
-  <div class="trio-main rv" style="transition-delay:0ms">
+  <a href="series.html?s=japan" class="trio-main rv" style="transition-delay:0ms">
     <img src="uploads/JAPO0231.jpg" alt="Golden Gai, Tokyo" />
     <div class="img-mask"></div>
     <div class="trio-tag"><span class="tn">01</span>Golden Gai &middot; Tokyo</div>
-  </div>
-  <div class="trio-extra rv" style="transition-delay:180ms">
+  </a>
+  <a href="series.html?s=japan" class="trio-extra rv" style="transition-delay:180ms">
     <img src="uploads/site-1-34.jpg" alt="Between columns, Tokyo" />
     <div class="img-mask"></div>
     <div class="trio-tag"><span class="tn">04</span>Between columns &middot; Tokyo</div>
-  </div>
+  </a>
   <div class="trio-stack">
-    <div class="trio-frame rv" style="transition-delay:120ms">
+    <a href="series.html?s=elsewhere" class="trio-frame rv" style="transition-delay:120ms">
       <img src="uploads/NY2025-27-1.jpg" alt="After the swim, Hoëdic" />
       <div class="img-mask"></div>
       <div class="trio-tag"><span class="tn">02</span>Hoëdic &middot; Bretagne</div>
-    </div>
-    <div class="trio-frame rv" style="transition-delay:240ms">
+    </a>
+    <a href="series.html?s=lanzarote" class="trio-frame rv" style="transition-delay:240ms">
       <img src="uploads/site-1-32.jpg" alt="Lava road, Timanfaya" />
       <div class="img-mask"></div>
       <div class="trio-tag"><span class="tn">03</span>Timanfaya &middot; Lanzarote</div>
-    </div>
+    </a>
   </div>
 </section>
 
@@ -454,7 +454,7 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
     <p>Each series is a notebook — images assembled without caption or hierarchy, as close as possible to lived time.</p>
   </div>
 
-  <div class="serie-panel rv">
+  <a href="series.html?s=japan" class="serie-panel rv">
     <div class="serie-panel-img"><img src="uploads/JAPO0231.jpg" alt="Japan" /></div>
     <span class="serie-bg-num" aria-hidden="true">I</span>
     <div class="serie-panel-content">
@@ -462,11 +462,11 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
         <h3>Japan</h3>
         <div class="meta">16 photographs</div>
       </div>
-      <a href="series.html?s=japan" class="serie-cta">View series &rarr;</a>
+      <span class="serie-cta">View series &rarr;</span>
     </div>
-  </div>
+  </a>
 
-  <div class="serie-panel rv">
+  <a href="series.html?s=lanzarote" class="serie-panel rv">
     <div class="serie-panel-img"><img src="uploads/site-1-32.jpg" alt="Lanzarote" /></div>
     <span class="serie-bg-num" aria-hidden="true">II</span>
     <div class="serie-panel-content">
@@ -474,11 +474,11 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
         <h3>Lanzarote</h3>
         <div class="meta">8 photographs</div>
       </div>
-      <a href="series.html?s=lanzarote" class="serie-cta">View series &rarr;</a>
+      <span class="serie-cta">View series &rarr;</span>
     </div>
-  </div>
+  </a>
 
-  <div class="serie-panel rv">
+  <a href="series.html?s=elsewhere" class="serie-panel rv">
     <div class="serie-panel-img"><img src="uploads/NY2025-15-1.jpg" alt="Elsewhere" /></div>
     <span class="serie-bg-num" aria-hidden="true">III</span>
     <div class="serie-panel-content">
@@ -486,9 +486,9 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
         <h3>Elsewhere</h3>
         <div class="meta">NYC &middot; Oslo &middot; Hoëdic &middot; London &middot; Lithuania</div>
       </div>
-      <a href="series.html?s=elsewhere" class="serie-cta">View series &rarr;</a>
+      <span class="serie-cta">View series &rarr;</span>
     </div>
-  </div>
+  </a>
 </div>
 
 <!-- ── About ─────────────────────────────────── -->
