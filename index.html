@@ -87,12 +87,14 @@ body.chover .cur-ring[data-label]::after{opacity:1}
   display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
   padding:20px var(--pad);
   font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  background:linear-gradient(to bottom,rgba(10,10,10,.55) 0%,transparent 100%);
+  backdrop-filter:blur(0px);
 }
 .nav .brand{font-family:var(--sans);font-weight:100;font-size:17px;letter-spacing:.1em;text-transform:uppercase}
 .nav ul{list-style:none;display:flex;gap:28px;justify-content:center}
-.nav ul a{color:var(--dim);transition:color .3s}
-.nav ul a:hover{color:var(--fg)}
-.nav .avail{justify-self:end;color:var(--dim);display:flex;align-items:center;gap:8px}
+.nav ul a{color:var(--fg);opacity:.72;transition:opacity .3s}
+.nav ul a:hover{opacity:1}
+.nav .avail{justify-self:end;color:var(--fg);opacity:.72;display:flex;align-items:center;gap:8px}
 .dot-live{
   width:6px;height:6px;border-radius:50%;
   background:oklch(.78 .16 145);
