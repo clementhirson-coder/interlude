@@ -49,9 +49,9 @@ body.chover .cur-ring::after{opacity:1}
 
 /* nav */
 .nav{position:fixed;inset:0 0 auto 0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
   padding:20px var(--pad);
-  font-family:var(--mono);font-size:9px;letter-spacing:.26em;text-transform:uppercase;
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
   background:rgba(10,10,10,.72);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--line);}
@@ -61,7 +61,9 @@ body.chover .cur-ring::after{opacity:1}
   stroke-linecap:round;stroke-linejoin:round;transition:transform .35s}
 .nav .back:hover svg{transform:translateX(-4px)}
 .nav .brand{font-family:var(--sans);font-weight:200;font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg)}
-.nav .count{color:var(--fg);opacity:.72}
+.nav .meta{justify-self:end;color:var(--fg);display:flex;align-items:center;gap:12px}
+.nav .meta .series-title{opacity:1}
+.nav .meta .count{opacity:.54}
 
 /* ── series header ─────────────────────────── */
 .series-header{
@@ -244,10 +246,13 @@ footer .next-series:hover{gap:18px}
 <nav class="nav">
   <a href="index.html" class="back">
     <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-    Interlude
+    Back
   </a>
-  <span class="brand" id="nav-brand">Series</span>
-  <span class="count" id="nav-count"></span>
+  <span class="brand">Interlude</span>
+  <span class="meta">
+    <span class="series-title" id="nav-brand"></span>
+    <span class="count" id="nav-count"></span>
+  </span>
 </nav>
 
 <!-- header -->
