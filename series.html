@@ -287,82 +287,6 @@ footer .next-series:hover{gap:18px}
 </footer>
 
 <script>
-/* ── series data ─────────────────────────────── */
-const SERIES = {
-  japan: {
-    num:'Series I',title:'Japan',
-    cover:'uploads/JAPO0231.jpg',
-    right:'Tokyo · Nara · Kyōto<br/><strong>2022 — 2024</strong><br/>16 photographs',
-    loc:'Tokyo · Nara · Kyōto · Arashiyama',
-    q:'TRANSPORT<br/>& SOLITUDE',
-    txt:`<p>Japan returns again and again in the work — not the Japan of temples and cherry blossoms, but the one of commuter trains at midnight, rain-slicked alleys, and the peculiar silence of a city of fourteen million.</p><p>Shot over three visits between 2022 and 2024, mostly on the JR Chuo line and in the back streets of Shinjuku, Kōenji and Golden Gai. Clément Hirson is an amateur photographer based in Paris. The series is unfinished.</p>`,
-    next:{label:'Lanzarote',href:'series.html?s=lanzarote'},
-    photos:[
-      {src:'uploads/JAPO0231.jpg',place:'Golden Gai · Tokyo',code:'JA·01'},
-      {src:'uploads/site-1-19.jpg',place:'Tokyo · Dusk',code:'JA·02'},
-      {src:'uploads/site-1-27.jpg',place:'Shinjuku · Rain',code:'JA·03'},
-      {src:'uploads/site-1-34.jpg',place:'Between columns · Tokyo',code:'JA·04'},
-      {src:'uploads/site-1-18.jpg',place:'Bar reflection · Tokyo',code:'JA·05'},
-      {src:'uploads/site-1-21.jpg',place:'JR Conductor · White gloves',code:'JA·06'},
-      {src:'uploads/site-1-22.jpg',place:'Child alone · Train',code:'JA·07'},
-      {src:'uploads/site-1-23.jpg',place:'Sailor · Silhouette',code:'JA·08'},
-      {src:'uploads/site-1-17.jpg',place:'Kōenji · Go',code:'JA·09'},
-      {src:'uploads/site-1-24.jpg',place:'Station master · Interstitial',code:'JA·10'},
-      {src:'uploads/site-1-25.jpg',place:'JR Agent · Platform',code:'JA·11'},
-      {src:'uploads/site-1-26.jpg',place:'Red coat · Shibuya',code:'JA·12'},
-      {src:'uploads/site-1-28.jpg',place:'Sushi master · Counter',code:'JA·13'},
-      {src:'uploads/site-1-29.jpg',place:'Riders · Tokyo',code:'JA·14'},
-      {src:'uploads/site-1-33.jpg',place:'Parking · Yellow & Green',code:'JA·15'},
-      {src:'uploads/JAPO1433.jpg',place:'Nara · Forest light',code:'JA·16'},
-    ]
-  },
-  lanzarote:{
-    num:'Series II',title:'Lanzarote',
-    cover:'uploads/site-1-9.jpg',
-    right:'Canary Islands, ES<br/><strong>2023</strong><br/>8 photographs',
-    loc:'Timanfaya · Famara · El Golfo · Playa Blanca',
-    q:'VOLCANIC<br/>GROUND',
-    txt:`<p>Lanzarote is a place of recent memory — César Manrique's white walls, the black lava fields of Timanfaya, the Atlantic mist rolling over Famara. A landscape that looks designed rather than grown.</p><p>Shot in January 2023, mostly at the edges of the day when the light goes sideways across the stone and turns everything into shadow and silhouette. Clément Hirson is an amateur photographer based in Paris.</p>`,
-    next:{label:'Elsewhere',href:'series.html?s=elsewhere'},
-    photos:[
-      {src:'uploads/site-1-9.jpg',place:'Palmiers · Volcans',code:'LZ·01'},
-      {src:'uploads/site-1-32.jpg',place:'Route sur la lave · Timanfaya',code:'LZ·02'},
-      {src:'uploads/site-1-4.jpg',place:'Caleta de Famara · Panier',code:'LZ·03'},
-      {src:'uploads/site-1-6.jpg',place:'L\'agriculteur · Tracteur',code:'LZ·04'},
-      {src:'uploads/site-1-5.jpg',place:'Surfeur · Volcans',code:'LZ·05'},
-      {src:'uploads/site-1-7.jpg',place:'Porte en bois · Double exposition',code:'LZ·06'},
-      {src:'uploads/site-1-8.jpg',place:'Agaves dans la fumée',code:'LZ·07'},
-      {src:'uploads/site-1-10.jpg',place:'Double exposition · Lanzarote',code:'LZ·08'},
-    ]
-  },
-  elsewhere:{
-    num:'Series III',title:'Elsewhere',
-    cover:'uploads/site-1-3.jpg',
-    right:'NYC · Oslo · Hoëdic · London · Lithuania<br/><strong>2019 — 2026</strong><br/>15 photographs',
-    loc:'NYC · Oslo · Hoëdic · London · Vilnius',
-    q:'FIVE CITIES,<br/>ONE QUESTION',
-    txt:`<p>Elsewhere is the catch-all — everything that doesn't fit Japan or Lanzarote. New York at night, Oslo in winter, the wild Atlantic island of Hoëdic, a street in Hackney, a lake in Lithuania.</p><p>What holds them together is not geography but a quality of light: the kind that arrives sideways and leaves quickly, and which requires you to already be standing in the right place. Clément Hirson is an amateur photographer based in Paris.</p>`,
-    next:{label:'Japan',href:'series.html?s=japan'},
-    photos:[
-      {src:'uploads/site-1-3.jpg',place:'Hoëdic · Calvaire',code:'EW·01'},
-      {src:'uploads/NY2025-15-1.jpg',place:'Hoëdic · Le saut',code:'EW·02'},
-      {src:'uploads/NY2025-27-1.jpg',place:'Hoëdic · Après la baignade',code:'EW·03'},
-      {src:'uploads/NY2025-11-1.jpg',place:'Hoëdic · Lumière dorée',code:'EW·04'},
-      {src:'uploads/site-1-12.jpg',place:'Paris · Seine en crue',code:'EW·05'},
-      {src:'uploads/site-1.jpg',place:'NYC · Hot-dogs de nuit',code:'EW·06'},
-      {src:'uploads/site-1-11.jpg',place:'NYC · Basketball court',code:'EW·07'},
-      {src:'uploads/site-1-30.jpg',place:'Portrait urbain · Rideau de fer',code:'EW·08'},
-      {src:'uploads/site-1-2.jpg',place:'Oslo · Jetée enneigée',code:'EW·09'},
-      {src:'uploads/site-1-16.jpg',place:'Surfeurs · Contre-jour',code:'EW·10'},
-      {src:'uploads/site-1-13.jpg',place:'Londres · Ouvriers',code:'EW·11'},
-      {src:'uploads/site-1-31.jpg',place:'Vitre givrée · Portrait',code:'EW·12'},
-      {src:'uploads/site-1-14.jpg',place:'Lituanie · Dans l\'eau',code:'EW·13'},
-      {src:'uploads/upload_elsewhere-1778357436163.jpg',place:'Hoëdic · Le calvaire',code:'EW·14'},
-      {src:'uploads/upload_elsewhere-1778357446313.jpg',place:'Oslo',code:'EW·15'},
-    ]
-  }
-};
-
 /* ── helpers ─────────────────────────────────── */
 function optBase(src) {
   return src.replace('uploads/', 'uploads/opt/').replace(/\.jpg$/i, '');
@@ -376,132 +300,136 @@ function picHTML(src, alt, sizes, extra='') {
   </picture>`;
 }
 
-/* ── read URL param ───────────────────────────── */
-const key = (new URLSearchParams(location.search).get('s') || 'japan').toLowerCase();
-const s = SERIES[key] || SERIES.japan;
+/* ── build page from data ────────────────────── */
+function buildPage(allSeries) {
+  const key = (new URLSearchParams(location.search).get('s') || Object.keys(allSeries)[0]).toLowerCase();
+  const raw = allSeries[key] || allSeries[Object.keys(allSeries)[0]];
 
-/* ── populate header ─────────────────────────── */
-document.title = 'INTERLUDE — ' + s.title;
-document.getElementById('nav-brand').textContent = s.title;
-document.getElementById('nav-count').textContent = s.photos.length + ' photographs';
-document.getElementById('sh-cover').innerHTML = picHTML(s.cover, s.title, '100vw');
-document.getElementById('sh-num').textContent = s.num;
-document.getElementById('sh-title').textContent = s.title;
-document.getElementById('sh-right').innerHTML = s.right;
-document.getElementById('meta-loc').textContent = s.loc;
-document.getElementById('meta-count').textContent = s.photos.length + ' frames';
-document.getElementById('series-q').innerHTML = s.q;
-document.getElementById('series-txt').innerHTML = s.txt;
-const nl = document.getElementById('next-link');
-nl.textContent = 'Next — ' + s.next.label + ' →';
-nl.href = s.next.href;
+  /* normalise photos: data.json uses {file} → build {src} */
+  const photos = raw.photos.map(p => ({
+    src:   'uploads/' + p.file,
+    place: p.place,
+    code:  p.code
+  }));
+  const coverSrc = 'uploads/' + raw.cover;
+  const nextKey  = raw.next;
+  const nextSerie = allSeries[nextKey];
 
-/* ── build gallery ───────────────────────────── */
-const gallery = document.getElementById('gallery');
-const progFill = document.getElementById('prog-fill');
-const photos = s.photos;
+  /* header */
+  document.title = 'INTERLUDE — ' + raw.title;
+  document.getElementById('nav-brand').textContent  = raw.title;
+  document.getElementById('nav-count').textContent  = photos.length + ' photographs';
+  document.getElementById('sh-cover').innerHTML     = picHTML(coverSrc, raw.title, '100vw');
+  document.getElementById('sh-num').textContent     = raw.num;
+  document.getElementById('sh-title').textContent   = raw.title;
+  document.getElementById('sh-right').innerHTML     = raw.right + '<br/>' + photos.length + ' photographs';
+  document.getElementById('meta-loc').textContent   = raw.loc;
+  document.getElementById('meta-count').textContent = photos.length + ' frames';
+  document.getElementById('series-q').innerHTML     = raw.q;
+  document.getElementById('series-txt').innerHTML   = raw.txt;
+  const nl = document.getElementById('next-link');
+  if (nextSerie) {
+    nl.textContent = 'Next — ' + nextSerie.title + ' →';
+    nl.href = 'series.html?s=' + nextKey;
+  }
 
-const SIZES_GALLERY = '(max-width:480px) 100vw, (max-width:760px) 50vw, 33vw';
+  /* gallery */
+  const gallery  = document.getElementById('gallery');
+  const progFill = document.getElementById('prog-fill');
+  const SIZES_GALLERY = '(max-width:480px) 100vw, (max-width:760px) 50vw, 33vw';
 
-photos.forEach((p,i)=>{
-  const fig = document.createElement('figure');
-  fig.className='gitem';
-  fig.dataset.idx = i;
-  fig.innerHTML = picHTML(p.src, p.place, SIZES_GALLERY, i<6?'':'loading="lazy"')
-    + `<figcaption class="gitem-cap">
-      <span class="place">${p.place}</span>
-      <span class="code">${p.code}</span>
-    </figcaption>`;
-  fig.addEventListener('click',()=>openLb(i));
-  gallery.appendChild(fig);
-});
-
-/* ── reveal ──────────────────────────────────── */
-const io = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('in');
-      io.unobserve(e.target);
-    }
+  photos.forEach((p,i)=>{
+    const fig = document.createElement('figure');
+    fig.className='gitem';
+    fig.dataset.idx = i;
+    fig.innerHTML = picHTML(p.src, p.place, SIZES_GALLERY, i<6?'':'loading="lazy"')
+      + `<figcaption class="gitem-cap">
+        <span class="place">${p.place}</span>
+        <span class="code">${p.code}</span>
+      </figcaption>`;
+    fig.addEventListener('click',()=>openLb(i));
+    gallery.appendChild(fig);
   });
-},{threshold:.06});
-document.querySelectorAll('.gitem').forEach((el,i)=>{
-  el.style.transitionDelay = Math.min(i%4,3)*80+'ms';
-  io.observe(el);
-});
 
-/* progress bar on scroll */
-window.addEventListener('scroll',()=>{
-  const el = gallery;
-  const rect = el.getBoundingClientRect();
-  const total = el.offsetHeight;
-  const scrolled = Math.max(0, -rect.top);
-  const pct = Math.min(100, (scrolled/total)*100);
-  progFill.style.width = pct+'%';
-},{passive:true});
+  /* reveal */
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:.06});
+  document.querySelectorAll('.gitem').forEach((el,i)=>{
+    el.style.transitionDelay = Math.min(i%4,3)*80+'ms';
+    io.observe(el);
+  });
 
-/* ── lightbox ────────────────────────────────── */
-const lb = document.getElementById('lb');
-const lbImg = document.getElementById('lb-img');
-const lbPlace = document.getElementById('lb-place');
-const lbCounter = document.getElementById('lb-counter');
-const lbCounterTop = document.getElementById('lb-counter-top');
-let lbIdx = 0;
+  /* progress bar */
+  window.addEventListener('scroll',()=>{
+    const rect = gallery.getBoundingClientRect();
+    const pct = Math.min(100, Math.max(0, (-rect.top / gallery.offsetHeight)*100));
+    progFill.style.width = pct+'%';
+  },{passive:true});
 
-function openLb(i){
-  lbIdx = i; showLb();
-  lb.classList.add('open');
-  document.body.style.overflow='hidden';
+  /* lightbox */
+  const lb = document.getElementById('lb');
+  const lbImg = document.getElementById('lb-img');
+  const lbPlace = document.getElementById('lb-place');
+  const lbCounter = document.getElementById('lb-counter');
+  const lbCounterTop = document.getElementById('lb-counter-top');
+  let lbIdx = 0;
+
+  function openLb(i){ lbIdx=i; showLb(); lb.classList.add('open'); document.body.style.overflow='hidden'; }
+  function showLb(){
+    const p = photos[lbIdx];
+    lbImg.src = optBase(p.src)+'-1920.jpg';
+    lbImg.alt = p.place;
+    lbPlace.textContent = p.place;
+    const c = (lbIdx+1)+' / '+photos.length;
+    lbCounter.textContent = lbCounterTop.textContent = c;
+  }
+  function closeLb(){ lb.classList.remove('open'); document.body.style.overflow=''; }
+
+  document.getElementById('lb-close').addEventListener('click', closeLb);
+  document.getElementById('lb-prev').addEventListener('click', ()=>{ lbIdx=(lbIdx-1+photos.length)%photos.length; showLb(); });
+  document.getElementById('lb-next').addEventListener('click', ()=>{ lbIdx=(lbIdx+1)%photos.length; showLb(); });
+  lb.addEventListener('click', e=>{ if(e.target===lb) closeLb(); });
+  document.addEventListener('keydown', e=>{
+    if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') closeLb();
+    if(e.key==='ArrowLeft')  { lbIdx=(lbIdx-1+photos.length)%photos.length; showLb(); }
+    if(e.key==='ArrowRight') { lbIdx=(lbIdx+1)%photos.length; showLb(); }
+  });
+
+  /* swipe */
+  let ts=0,tx=0;
+  lb.addEventListener('touchstart',e=>{ ts=Date.now(); tx=e.touches[0].clientX; },{passive:true});
+  lb.addEventListener('touchend',e=>{
+    if(Date.now()-ts>300) return;
+    const dx=e.changedTouches[0].clientX-tx;
+    if(Math.abs(dx)<40) return;
+    lbIdx = dx<0 ? (lbIdx+1)%photos.length : (lbIdx-1+photos.length)%photos.length;
+    showLb();
+  });
+
+  /* cursor hover on gallery items */
+  document.querySelectorAll('.gitem,a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('chover'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('chover'));
+  });
 }
-function showLb(){
-  const p = photos[lbIdx];
-  lbImg.src = optBase(p.src) + '-1920.jpg';
-  lbImg.alt = p.place;
-  lbPlace.textContent = p.place;
-  const c = (lbIdx+1)+' / '+photos.length;
-  lbCounter.textContent = c;
-  lbCounterTop.textContent = c;
-}
-function closeLb(){
-  lb.classList.remove('open');
-  document.body.style.overflow='';
-}
-document.getElementById('lb-close').addEventListener('click',closeLb);
-document.getElementById('lb-prev').addEventListener('click',()=>{lbIdx=(lbIdx-1+photos.length)%photos.length;showLb()});
-document.getElementById('lb-next').addEventListener('click',()=>{lbIdx=(lbIdx+1)%photos.length;showLb()});
-lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
-document.addEventListener('keydown',e=>{
-  if(!lb.classList.contains('open')) return;
-  if(e.key==='Escape')closeLb();
-  if(e.key==='ArrowLeft'){lbIdx=(lbIdx-1+photos.length)%photos.length;showLb();}
-  if(e.key==='ArrowRight'){lbIdx=(lbIdx+1)%photos.length;showLb();}
-});
 
-/* swipe */
-let ts=0,tx=0;
-lb.addEventListener('touchstart',e=>{ts=Date.now();tx=e.touches[0].clientX},{passive:true});
-lb.addEventListener('touchend',e=>{
-  if(Date.now()-ts>300)return;
-  const dx=e.changedTouches[0].clientX-tx;
-  if(Math.abs(dx)<40)return;
-  if(dx<0){lbIdx=(lbIdx+1)%photos.length;showLb();}
-  else{lbIdx=(lbIdx-1+photos.length)%photos.length;showLb();}
-});
+/* ── fetch data.json and init ────────────────── */
+fetch('data.json')
+  .then(r => r.json())
+  .then(data => buildPage(data.series))
+  .catch(() => console.error('Impossible de charger data.json'));
 
 /* ── cursor ──────────────────────────────────── */
 const dot=document.getElementById('cur-dot');
 const ring=document.getElementById('cur-ring');
 if(!matchMedia('(pointer:coarse)').matches){
   let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
-  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;
-    dot.style.left=mx+'px';dot.style.top=my+'px';});
-  (function tick(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
-    ring.style.left=rx+'px';ring.style.top=ry+'px';
-    requestAnimationFrame(tick);})();
-  document.querySelectorAll('.gitem,a,button').forEach(el=>{
-    el.addEventListener('mouseenter',()=>document.body.classList.add('chover'));
-    el.addEventListener('mouseleave',()=>document.body.classList.remove('chover'));
-  });
+  addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; dot.style.left=mx+'px'; dot.style.top=my+'px'; });
+  (function tick(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(tick); })();
 }
 
 /* ── load ────────────────────────────────────── */
