@@ -25,6 +25,7 @@ body.loaded{opacity:1}
 @media(pointer:coarse){body{cursor:auto}}
 a{color:inherit;text-decoration:none}
 img{display:block}
+picture{display:contents}
 
 /* grain */
 body::before{content:"";position:fixed;inset:0;z-index:400;pointer-events:none;
@@ -248,7 +249,7 @@ footer .next-series:hover{gap:18px}
 
 <!-- header -->
 <header class="series-header" id="series-header">
-  <div class="sh-cover"><img id="cover-img" src="" alt="" /></div>
+  <div class="sh-cover" id="sh-cover"></div>
   <div class="sh-shade"></div>
   <div class="sh-content">
     <div class="sh-left">
@@ -362,6 +363,19 @@ const SERIES = {
   }
 };
 
+/* ── helpers ─────────────────────────────────── */
+function optBase(src) {
+  return src.replace('uploads/', 'uploads/opt/').replace(/\.jpg$/i, '');
+}
+function picHTML(src, alt, sizes, extra='') {
+  const b = optBase(src);
+  return `<picture>
+    <source srcset="${b}-900.avif 900w, ${b}-1920.avif 1920w" type="image/avif" sizes="${sizes}">
+    <source srcset="${b}-900.jpg 900w, ${b}-1920.jpg 1920w" type="image/jpeg" sizes="${sizes}">
+    <img src="${b}-1920.jpg" alt="${alt}" ${extra}>
+  </picture>`;
+}
+
 /* ── read URL param ───────────────────────────── */
 const key = (new URLSearchParams(location.search).get('s') || 'japan').toLowerCase();
 const s = SERIES[key] || SERIES.japan;
@@ -370,8 +384,7 @@ const s = SERIES[key] || SERIES.japan;
 document.title = 'INTERLUDE — ' + s.title;
 document.getElementById('nav-brand').textContent = s.title;
 document.getElementById('nav-count').textContent = s.photos.length + ' photographs';
-document.getElementById('cover-img').src = s.cover;
-document.getElementById('cover-img').alt = s.title;
+document.getElementById('sh-cover').innerHTML = picHTML(s.cover, s.title, '100vw');
 document.getElementById('sh-num').textContent = s.num;
 document.getElementById('sh-title').textContent = s.title;
 document.getElementById('sh-right').innerHTML = s.right;
@@ -388,12 +401,14 @@ const gallery = document.getElementById('gallery');
 const progFill = document.getElementById('prog-fill');
 const photos = s.photos;
 
+const SIZES_GALLERY = '(max-width:480px) 100vw, (max-width:760px) 50vw, 33vw';
+
 photos.forEach((p,i)=>{
   const fig = document.createElement('figure');
   fig.className='gitem';
   fig.dataset.idx = i;
-  fig.innerHTML=`<img src="${p.src}" alt="${p.place}" loading="${i<6?'eager':'lazy'}" />
-    <figcaption class="gitem-cap">
+  fig.innerHTML = picHTML(p.src, p.place, SIZES_GALLERY, i<6?'':'loading="lazy"')
+    + `<figcaption class="gitem-cap">
       <span class="place">${p.place}</span>
       <span class="code">${p.code}</span>
     </figcaption>`;
@@ -440,7 +455,7 @@ function openLb(i){
 }
 function showLb(){
   const p = photos[lbIdx];
-  lbImg.src = p.src;
+  lbImg.src = optBase(p.src) + '-1920.jpg';
   lbImg.alt = p.place;
   lbPlace.textContent = p.place;
   const c = (lbIdx+1)+' / '+photos.length;
