@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>INTERLUDE — Clément Hirson</title>
+<meta name="description" content="Interlude — documentary photography by Clément Hirson. Japan, Lanzarote, Elsewhere." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+<style>
+/* ── tokens ──────────────────────────────────── */
+:root{
+  --bg:#0a0a0a;
+  --bg2:#0f0f0f;
+  --fg:#f2efe9;
+  --dim:rgba(242,239,233,.36);
+  --mute:rgba(242,239,233,.16);
+  --line:#1c1c1c;
+  --accent:oklch(0.88 0.04 80);
+  --sans:"Jost","Helvetica Neue",sans-serif;
+  --mono:"DM Mono","Courier New",monospace;
+  --pad:clamp(20px,3vw,44px);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--fg);
+  font-family:var(--sans);font-weight:300;
+  overflow-x:hidden;cursor:none;
+  -webkit-font-smoothing:antialiased;
+  opacity:0;transition:opacity 1s;
+}
+body.loaded{opacity:1}
+@media(pointer:coarse){body{cursor:auto}}
+a{color:inherit;text-decoration:none}
+img{display:block}
+
+/* ── grain + vignette ────────────────────────── */
+.grain{
+  position:fixed;inset:0;pointer-events:none;z-index:400;
+  opacity:.052;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+.vignette{
+  position:fixed;inset:0;pointer-events:none;z-index:399;
+  background:radial-gradient(ellipse at center,transparent 52%,rgba(0,0,0,.5) 100%);
+}
+
+/* ── cursor ──────────────────────────────────── */
+.cur-dot{
+  position:fixed;width:8px;height:8px;border-radius:50%;
+  background:var(--fg);pointer-events:none;z-index:500;
+  transform:translate(-50%,-50%);mix-blend-mode:difference;
+  transition:width .25s,height .25s;
+}
+.cur-ring{
+  position:fixed;width:34px;height:34px;border-radius:50%;
+  border:1px solid rgba(242,239,233,.4);
+  pointer-events:none;z-index:499;
+  transform:translate(-50%,-50%);
+  transition:width .35s,height .35s,opacity .25s;
+}
+.cur-ring[data-label]::after{
+  content:attr(data-label);
+  position:absolute;inset:0;
+  display:grid;place-items:center;
+  font-family:var(--mono);font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--bg);opacity:0;
+}
+body.chover .cur-dot{width:0;height:0}
+body.chover .cur-ring{
+  width:88px;height:88px;
+  border-color:transparent;
+  background:var(--fg);
+  mix-blend-mode:normal;
+}
+body.chover .cur-ring[data-label]::after{opacity:1}
+
+/* ── nav ─────────────────────────────────────── */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:200;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:20px var(--pad);
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+}
+.nav .brand{font-family:var(--sans);font-weight:100;font-size:17px;letter-spacing:.1em;text-transform:uppercase}
+.nav ul{list-style:none;display:flex;gap:28px;justify-content:center}
+.nav ul a{color:var(--dim);transition:color .3s}
+.nav ul a:hover{color:var(--fg)}
+.nav .avail{justify-self:end;color:var(--dim);display:flex;align-items:center;gap:8px}
+.dot-live{
+  width:6px;height:6px;border-radius:50%;
+  background:oklch(.78 .16 145);
+  box-shadow:0 0 0 0 oklch(.78 .16 145/.5);
+  animation:pulse 2.4s infinite;
+}
+@keyframes pulse{0%{box-shadow:0 0 0 0 oklch(.78 .16 145/.45)}70%{box-shadow:0 0 0 8px oklch(.78 .16 145/0)}100%{box-shadow:0 0 0 0 oklch(.78 .16 145/0)}}
+
+/* ── hero ────────────────────────────────────── */
+.hero{
+  position:relative;height:100svh;min-height:600px;
+  overflow:hidden;background:var(--bg);
+}
+.hero-photo{
+  position:absolute;top:0;right:0;bottom:0;width:62%;overflow:hidden;
+}
+.hero-photo img{
+  width:100%;height:100%;object-fit:cover;object-position:center;
+  filter:contrast(1.08) saturate(.85) brightness(.88);
+  will-change:transform;
+}
+.hero-shade{
+  position:absolute;top:0;left:0;bottom:0;width:54%;
+  background:linear-gradient(to right,var(--bg) 28%,transparent 100%);
+  z-index:1;pointer-events:none;
+}
+.hero-shade-b{
+  position:absolute;inset:auto 0 0 0;height:36%;
+  background:linear-gradient(to top,var(--bg) 0%,transparent 100%);
+  z-index:1;pointer-events:none;
+}
+.hero-title{
+  position:absolute;z-index:2;
+  bottom:14vh;left:5vw;
+  font-family:var(--sans);font-weight:100;
+  font-size:clamp(64px,13.5vw,210px);
+  line-height:.85;letter-spacing:.12em;text-transform:uppercase;
+  pointer-events:none;user-select:none;
+}
+.hero-foot{
+  position:absolute;z-index:3;
+  bottom:24px;left:var(--pad);right:var(--pad);
+  display:flex;justify-content:space-between;align-items:flex-end;
+}
+.hero-foot .l{font-family:var(--mono);font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);line-height:1.8}
+.hero-foot .r{font-family:var(--mono);font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);text-align:right}
+.hero-scroll{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:var(--dim);
+}
+.hero-scroll i{display:block;width:1px;height:36px;
+  background:linear-gradient(to bottom,var(--dim),transparent);
+  font-style:normal;animation:drip 2.4s ease-in-out infinite}
+@keyframes drip{
+  0%{transform:scaleY(0);transform-origin:top;opacity:0}
+  50%{transform:scaleY(1);transform-origin:top;opacity:1}
+  100%{transform:scaleY(0);transform-origin:bottom;opacity:0}
+}
+
+/* ── marquee ─────────────────────────────────── */
+.ticker-band{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  overflow:hidden;margin-top:120px;
+  display:flex;flex-direction:column;
+}
+.ticker-row{
+  overflow:hidden;padding:10px 0;
+  border-bottom:1px solid var(--line);
+}
+.ticker-row:last-child{border-bottom:none}
+.ticker-inner{
+  display:inline-flex;white-space:nowrap;
+  font-family:var(--mono);font-weight:300;
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);
+  gap:44px;
+}
+.ticker-inner b{font-weight:400;color:var(--fg)}
+.t-left{animation:t-scroll-l 28s linear infinite}
+.t-right{animation:t-scroll-r 38s linear infinite}
+@keyframes t-scroll-l{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes t-scroll-r{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+
+/* ── photo trio ─────────────────────────────── */
+.photo-trio{
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  grid-template-rows:3fr 2fr;
+  gap:3px;
+  padding:80px var(--pad) 0;
+  max-height:90vh;
+}
+.trio-main{
+  grid-column:1;grid-row:1;
+  position:relative;overflow:hidden;background:var(--bg2);
+}
+.trio-extra{
+  grid-column:1;grid-row:2;
+  position:relative;overflow:hidden;background:var(--bg2);
+}
+.trio-stack{
+  grid-column:2;grid-row:1/3;
+  display:flex;flex-direction:column;gap:3px;
+}
+.trio-frame{
+  flex:1;min-height:200px;
+  position:relative;overflow:hidden;background:var(--bg2);
+}
+.trio-main img,.trio-frame img,.trio-extra img{
+  width:100%;height:100%;object-fit:cover;
+  filter:contrast(1.06) brightness(.9) saturate(.88);
+  transform:scale(1);
+  transition:transform 1.6s cubic-bezier(.22,.61,.36,1),filter .9s;
+}
+.trio-main:hover img,.trio-frame:hover img,.trio-extra:hover img{
+  transform:scale(1.04);
+  filter:contrast(1.08) brightness(.96) saturate(.95);
+}
+.trio-tag{
+  position:absolute;left:14px;bottom:12px;z-index:3;
+  font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--fg);mix-blend-mode:difference;
+}
+.trio-tag .tn{color:var(--accent);margin-right:6px}
+.img-mask{
+  position:absolute;inset:0;
+  background:var(--bg);
+  transform-origin:top;
+  transition:transform 1.5s cubic-bezier(.7,.05,.2,1);
+  z-index:2;
+}
+.rv.in .img-mask{transform:scaleY(0)}
+
+/* ── text block ─────────────────────────────── */
+.text-block{
+  padding:80px var(--pad) 0;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px 80px;
+  align-items:start;
+  border-top:1px solid var(--line);margin-top:80px;
+  padding-top:56px;
+}
+.text-lead{
+  font-family:var(--sans);font-weight:100;
+  font-size:clamp(28px,3.2vw,52px);
+  line-height:1.18;letter-spacing:.06em;text-transform:uppercase;
+}
+.text-body{
+  font-family:var(--mono);font-size:12px;line-height:1.82;
+  color:var(--dim);align-self:end;
+}
+
+/* ── series panels ───────────────────────────── */
+.series-panels{padding:140px 0 0}
+.series-panels-head{
+  padding:40px var(--pad) 56px;
+  border-top:1px solid var(--line);margin:0 var(--pad);
+  display:flex;align-items:flex-end;justify-content:space-between;
+}
+.series-panels-head h2{
+  font-family:var(--sans);font-weight:100;
+  font-size:clamp(48px,6vw,96px);line-height:.88;
+  text-transform:uppercase;letter-spacing:.1em;
+}
+.series-panels-head p{max-width:36ch;font-family:var(--mono);font-size:11px;line-height:1.7;color:var(--dim)}
+
+.serie-panel{
+  position:relative;height:90vh;min-height:520px;
+  overflow:hidden;margin-bottom:3px;
+}
+.serie-panel-img{position:absolute;inset:0}
+.serie-panel-img img{
+  width:100%;height:100%;object-fit:cover;
+  filter:contrast(1.1) saturate(.8) brightness(.65);
+  transform:scale(1.05);
+  transition:transform 2.4s cubic-bezier(.22,.61,.36,1),filter 1.2s;
+}
+.serie-panel:hover .serie-panel-img img{
+  transform:scale(1);filter:contrast(1.05) saturate(.9) brightness(.78);
+}
+.serie-bg-num{
+  position:absolute;top:-2vw;left:-1vw;z-index:1;
+  font-family:var(--sans);font-weight:100;
+  font-size:clamp(140px,28vw,460px);line-height:1;letter-spacing:.04em;
+  color:rgba(242,239,233,.04);pointer-events:none;user-select:none;
+}
+.serie-panel-content{
+  position:absolute;z-index:2;
+  bottom:48px;left:var(--pad);right:var(--pad);
+  display:flex;align-items:flex-end;justify-content:space-between;
+}
+.serie-panel-content .inf h3{
+  font-family:var(--sans);font-weight:100;
+  font-size:clamp(52px,7vw,110px);line-height:.88;
+  text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px;
+}
+.serie-panel-content .inf .meta{
+  font-family:var(--mono);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);
+  display:flex;align-items:center;gap:12px;
+}
+.serie-panel-content .inf .meta::before{content:"";display:block;width:22px;height:1px;background:var(--dim)}
+.serie-cta{
+  font-family:var(--mono);font-size:9px;letter-spacing:.28em;text-transform:uppercase;
+  border:1px solid rgba(242,239,233,.28);padding:13px 20px;color:var(--fg);
+  transition:all .35s;white-space:nowrap;align-self:flex-end;
+}
+.serie-cta:hover{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+
+/* ── about ───────────────────────────────────── */
+.about{
+  padding:160px var(--pad) 140px;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  border-top:1px solid var(--line);margin-top:140px;align-items:start;
+}
+.about .quote{
+  font-family:var(--sans);font-weight:200;
+  font-size:clamp(26px,2.8vw,44px);line-height:1.3;letter-spacing:.04em;
+}
+.about .quote cite{
+  display:block;margin-top:28px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--dim);font-style:normal;
+}
+.about .body{font-family:var(--mono);font-size:12px;line-height:1.82;color:var(--dim)}
+.about .body p+p{margin-top:14px}
+.about .body strong{color:var(--fg);font-weight:400}
+.about-meta{
+  margin-top:40px;padding-top:26px;border-top:1px solid var(--line);
+  display:grid;grid-template-columns:auto 1fr;gap:9px 22px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+}
+.about-meta .k{color:var(--dim)}.about-meta .v{color:var(--fg)}
+
+/* ── footer ──────────────────────────────────── */
+footer{
+  padding:36px var(--pad) 32px;border-top:1px solid var(--line);
+  display:grid;grid-template-columns:1fr 1fr 1fr;align-items:end;gap:20px;
+}
+footer .mark{
+  font-family:var(--sans);font-weight:100;
+  font-size:clamp(36px,4.5vw,64px);letter-spacing:.14em;text-transform:uppercase;line-height:.9;
+}
+footer .links{display:flex;gap:48px;justify-content:center}
+footer .lk{font-family:var(--mono);font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim)}
+footer .lk a{
+  display:block;margin-top:8px;font-family:var(--sans);font-weight:200;
+  font-size:14px;letter-spacing:.04em;color:var(--fg);transition:opacity .3s;
+}
+footer .lk a:hover{opacity:.55}
+footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);text-align:right}
+
+/* ── reveal ──────────────────────────────────── */
+.rv{opacity:0;transform:translateY(22px);
+  transition:opacity 1200ms cubic-bezier(.22,.61,.36,1),transform 1200ms cubic-bezier(.22,.61,.36,1)}
+.rv.in{opacity:1;transform:none}
+.rv-d1{transition-delay:100ms}.rv-d2{transition-delay:220ms}
+
+/* ── mobile ──────────────────────────────────── */
+@media(max-width:860px){
+  .hero-photo{width:100%;opacity:.55}
+  .hero-shade{width:100%;background:linear-gradient(to top,var(--bg) 10%,rgba(10,10,10,.3) 60%,transparent)}
+  .hero-title{font-size:clamp(52px,15vw,120px);bottom:22vh;left:4vw}
+  .nav ul{display:none}.nav .avail{display:none}
+  .photo-trio{grid-template-columns:1fr;grid-template-rows:auto;padding:60px 20px 0;gap:2px;max-height:none}
+  .trio-main,.trio-extra{aspect-ratio:3/2}
+  .trio-stack{flex-direction:row;gap:2px}
+  .trio-frame{min-height:180px}
+  .text-block{grid-template-columns:1fr;gap:24px;margin-top:40px;padding:40px 20px 0}
+  .series-panels-head{flex-direction:column;align-items:flex-start;gap:16px;margin:0 20px;padding-left:0;padding-right:0}
+  .serie-panel-content{flex-direction:column;align-items:flex-start;gap:18px}
+  .about{grid-template-columns:1fr;gap:40px;padding:80px 20px}
+  footer{grid-template-columns:1fr;gap:28px;padding:28px 20px}
+  footer .links{justify-content:flex-start}
+  footer .copy{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="vignette"></div>
+<div class="cur-dot" id="cur-dot"></div>
+<div class="cur-ring" id="cur-ring" data-label="View"></div>
+
+<!-- ── Nav ──────────────────────────────────── -->
+<nav class="nav">
+  <span class="brand">Interlude</span>
+  <ul>
+    <li><a href="#index">Index</a></li>
+    <li><a href="#series">Series</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="avail"><span class="dot-live"></span>Available &mdash; 2026</div>
+</nav>
+
+<!-- ── Hero ─────────────────────────────────── -->
+<header id="top" class="hero">
+  <div class="hero-photo">
+    <img src="uploads/site-1-9.jpg" id="hero-img" alt="Lanzarote" />
+  </div>
+  <div class="hero-shade"></div>
+  <div class="hero-shade-b"></div>
+  <h1 class="hero-title">Inter&shy;lude</h1>
+  <div class="hero-foot">
+    <div class="l">Paris, France<br/>Documentary photography</div>
+    <div class="r">2019 &mdash; 2026</div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
+</header>
+
+<!-- ── Ticker band ───────────────────────── -->
+<div class="ticker-band">
+  <div class="ticker-row">
+    <div class="ticker-inner t-left">
+      <span><b>Japan</b> &mdash; <b>Lanzarote</b> &mdash; <b>Elsewhere</b> &mdash; Tokyo &mdash; Shinjuku &mdash; Nara &mdash; Kyōto &mdash; Timanfaya &mdash; Famara &mdash; NYC &mdash; Oslo &mdash; Hoëdic &mdash; London &mdash; Lithuania &mdash; Paris &mdash;</span>
+      <span><b>Japan</b> &mdash; <b>Lanzarote</b> &mdash; <b>Elsewhere</b> &mdash; Tokyo &mdash; Shinjuku &mdash; Nara &mdash; Kyōto &mdash; Timanfaya &mdash; Famara &mdash; NYC &mdash; Oslo &mdash; Hoëdic &mdash; London &mdash; Lithuania &mdash; Paris &mdash;</span>
+    </div>
+  </div>
+  <div class="ticker-row">
+    <div class="ticker-inner t-right">
+      <span>35°39’N 139°44’E &mdash; 29°01’N 13°33’W &mdash; 48°51’N 2°21’E &mdash; 40°42’N 74°00’W &mdash; 59°54’N 10°44’E &mdash; 47°21’N 2°52’W &mdash; 51°30’N 0°07’W &mdash; 54°41’N 25°17’E &mdash; 28°57’N 13°36’W &mdash;</span>
+      <span>35°39’N 139°44’E &mdash; 29°01’N 13°33’W &mdash; 48°51’N 2°21’E &mdash; 40°42’N 74°00’W &mdash; 59°54’N 10°44’E &mdash; 47°21’N 2°52’W &mdash; 51°30’N 0°07’W &mdash; 54°41’N 25°17’E &mdash; 28°57’N 13°36’W &mdash;</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Photo trio ─────────────────────────────── -->
+<section id="index" class="photo-trio">
+  <div class="trio-main rv" style="transition-delay:0ms">
+    <img src="uploads/JAPO0231.jpg" alt="Golden Gai, Tokyo" />
+    <div class="img-mask"></div>
+    <div class="trio-tag"><span class="tn">01</span>Golden Gai &middot; Tokyo</div>
+  </div>
+  <div class="trio-extra rv" style="transition-delay:180ms">
+    <img src="uploads/site-1-34.jpg" alt="Between columns, Tokyo" />
+    <div class="img-mask"></div>
+    <div class="trio-tag"><span class="tn">04</span>Between columns &middot; Tokyo</div>
+  </div>
+  <div class="trio-stack">
+    <div class="trio-frame rv" style="transition-delay:120ms">
+      <img src="uploads/NY2025-27-1.jpg" alt="After the swim, Hoëdic" />
+      <div class="img-mask"></div>
+      <div class="trio-tag"><span class="tn">02</span>Hoëdic &middot; Bretagne</div>
+    </div>
+    <div class="trio-frame rv" style="transition-delay:240ms">
+      <img src="uploads/site-1-32.jpg" alt="Lava road, Timanfaya" />
+      <div class="img-mask"></div>
+      <div class="trio-tag"><span class="tn">03</span>Timanfaya &middot; Lanzarote</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Text block ────────────────────────────── -->
+<div class="text-block rv">
+  <p class="text-lead">Seven years. Three geographies.<br/>One continuous question about light and waiting.</p>
+  <p class="text-body">Interlude is the long-term work of a documentary photographer based in Paris. Japan, Lanzarote, Elsewhere — images assembled without caption or hierarchy, as close as possible to lived time. The series have been shown in Arles, Tokyo and Lisbon.</p>
+</div>
+
+<!-- ── Series panels ─────────────────────────── -->
+<div class="series-panels" id="series">
+  <div class="series-panels-head rv">
+    <h2>Three<br/>series.</h2>
+    <p>Each series is a notebook — images assembled without caption or hierarchy, as close as possible to lived time.</p>
+  </div>
+
+  <div class="serie-panel rv">
+    <div class="serie-panel-img"><img src="uploads/JAPO0231.jpg" alt="Japan" /></div>
+    <span class="serie-bg-num" aria-hidden="true">I</span>
+    <div class="serie-panel-content">
+      <div class="inf">
+        <h3>Japan</h3>
+        <div class="meta">16 photographs</div>
+      </div>
+      <a href="series.html?s=japan" class="serie-cta">View series &rarr;</a>
+    </div>
+  </div>
+
+  <div class="serie-panel rv">
+    <div class="serie-panel-img"><img src="uploads/site-1-32.jpg" alt="Lanzarote" /></div>
+    <span class="serie-bg-num" aria-hidden="true">II</span>
+    <div class="serie-panel-content">
+      <div class="inf">
+        <h3>Lanzarote</h3>
+        <div class="meta">8 photographs</div>
+      </div>
+      <a href="series.html?s=lanzarote" class="serie-cta">View series &rarr;</a>
+    </div>
+  </div>
+
+  <div class="serie-panel rv">
+    <div class="serie-panel-img"><img src="uploads/NY2025-15-1.jpg" alt="Elsewhere" /></div>
+    <span class="serie-bg-num" aria-hidden="true">III</span>
+    <div class="serie-panel-content">
+      <div class="inf">
+        <h3>Elsewhere</h3>
+        <div class="meta">NYC &middot; Oslo &middot; Hoëdic &middot; London &middot; Lithuania</div>
+      </div>
+      <a href="series.html?s=elsewhere" class="serie-cta">View series &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── About ─────────────────────────────────── -->
+<section id="about" class="about rv">
+  <div class="quote">
+    &ldquo;The photograph already exists before you press the shutter. You just have to find it.&rdquo;
+    <cite>&mdash; Clément Hirson</cite>
+  </div>
+  <div class="body">
+    <p><strong>Clément Hirson</strong> is a Paris-based amateur photographer. The images seek suspended moments — between seasons, between lights, between words. Japan, Lanzarote, Elsewhere — three bodies of work assembled without hierarchy, as close as possible to lived time.</p>
+    <p>For print sales or any inquiry, write directly.</p>
+    <div class="about-meta">
+      <span class="k">Based in</span><span class="v">Paris, FR</span>
+      <span class="k">Available for</span><span class="v">Commissions &amp; prints &mdash; 2026</span>
+      <span class="k">Representation</span><span class="v">Independent</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ────────────────────────────────── -->
+<footer id="contact">
+  <div class="mark">Interlude</div>
+  <div class="links">
+    <div class="lk">Email<a href="mailto:clement.hirson@gmail.com">clement.hirson@gmail.com</a></div>
+    <div class="lk">Instagram<a href="https://www.instagram.com/clemhirson/" target="_blank" rel="noopener">@clemhirson</a></div>
+  </div>
+  <div class="copy">&copy; Clément Hirson &mdash; 2019 / 2026</div>
+</footer>
+
+<script>
+/* load */
+window.addEventListener('load', () => document.body.classList.add('loaded'));
+
+/* cursor */
+const dot = document.getElementById('cur-dot');
+const ring = document.getElementById('cur-ring');
+if (!matchMedia('(pointer:coarse)').matches) {
+  let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+  addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  });
+  (function tick() {
+    rx += (mx - rx) * .12; ry += (my - ry) * .12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(tick);
+  })();
+  document.querySelectorAll('a,button,.serie-cta,.trio-main,.trio-extra,.trio-frame,.serie-panel').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('chover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('chover'));
+  });
+}
+
+/* hero parallax */
+const heroImg = document.getElementById('hero-img');
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      heroImg.style.transform = `translate3d(0,${scrollY * .22}px,0) scale(1.04)`;
+      ticking = false;
+    });
+    ticking = true;
+  }
+}, { passive: true });
+
+/* reveal on scroll */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
