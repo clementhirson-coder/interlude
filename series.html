@@ -51,14 +51,17 @@ body.chover .cur-ring::after{opacity:1}
 .nav{position:fixed;inset:0 0 auto 0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
   padding:20px var(--pad);
-  font-family:var(--mono);font-size:9px;letter-spacing:.26em;text-transform:uppercase;}
-.nav .back{display:flex;align-items:center;gap:10px;color:var(--dim);transition:color .3s}
-.nav .back:hover{color:var(--fg)}
+  font-family:var(--mono);font-size:9px;letter-spacing:.26em;text-transform:uppercase;
+  background:rgba(10,10,10,.72);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);}
+.nav .back{display:flex;align-items:center;gap:10px;color:var(--fg);transition:opacity .3s}
+.nav .back:hover{opacity:.6}
 .nav .back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5;
   stroke-linecap:round;stroke-linejoin:round;transition:transform .35s}
 .nav .back:hover svg{transform:translateX(-4px)}
-.nav .brand{font-family:var(--sans);font-weight:100;font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg)}
-.nav .count{color:var(--dim)}
+.nav .brand{font-family:var(--sans);font-weight:200;font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg)}
+.nav .count{color:var(--fg);opacity:.72}
 
 /* ── series header ─────────────────────────── */
 .series-header{
