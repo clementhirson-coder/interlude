@@ -80,7 +80,8 @@ body.chover .cur-ring::after{opacity:1}
 .nav .back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5;
   stroke-linecap:round;stroke-linejoin:round;transition:transform .35s}
 .nav .back:hover svg{transform:translateX(-4px)}
-.nav .brand{font-family:var(--sans);font-weight:200;font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg)}
+.nav .brand{font-family:var(--sans);font-weight:200;font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg);transition:opacity .3s}
+.nav .brand:hover{opacity:.7}
 .nav .meta{justify-self:end;color:var(--fg);display:flex;align-items:center;gap:12px}
 .nav .meta .series-title{opacity:1}
 .nav .meta .count{opacity:.54}
@@ -300,7 +301,7 @@ footer .next-series:hover{gap:18px}
     <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
     Back
   </a>
-  <span class="brand">Interlude</span>
+  <a href="/" class="brand" aria-label="Interlude — home">Interlude</a>
   <span class="meta">
     <span class="series-title" id="nav-brand"></span>
     <span class="count" id="nav-count"></span>
