@@ -3,4 +3,4 @@ Allow: /
 Disallow: /scripts/
 Disallow: /node_modules/
 
-Sitemap: https://lenstraveler.fr/sitemap.xml
+Sitemap: https://www.lenstraveler.fr/sitemap.xml
