@@ -255,39 +255,29 @@ body.chover .cur-ring[data-label]::after{opacity:1}
 .photo-trio{
   display:grid;
   grid-template-columns:1.4fr 1fr;
-  grid-template-rows:3fr 2fr;
   gap:3px;
   padding:80px var(--pad) 0;
-  max-height:90vh;
+  height:60vh;
+  min-height:380px;
 }
 .trio-main{
-  grid-column:1;grid-row:1;
   position:relative;overflow:hidden;background:var(--bg2);
-}
-.trio-extra{
-  grid-column:1;grid-row:2;
-  position:relative;overflow:hidden;background:var(--bg2);
-}
-.trio-stack{
-  grid-column:2;grid-row:1/3;
-  display:flex;flex-direction:column;gap:3px;
 }
 .trio-frame{
-  flex:1;min-height:200px;
   position:relative;overflow:hidden;background:var(--bg2);
 }
-.trio-main picture,.trio-frame picture,.trio-extra picture{
+.trio-main picture,.trio-frame picture{
   position:absolute;inset:0;display:block;
   opacity:0;transition:opacity .8s ease-in-out;
 }
-.trio-main picture.is-active,.trio-frame picture.is-active,.trio-extra picture.is-active{opacity:1}
-.trio-main img,.trio-frame img,.trio-extra img{
+.trio-main picture.is-active,.trio-frame picture.is-active{opacity:1}
+.trio-main img,.trio-frame img{
   width:100%;height:100%;object-fit:cover;
   filter:contrast(1.06) brightness(.9) saturate(.88);
   transform:scale(1);
   transition:transform 1.6s cubic-bezier(.22,.61,.36,1),filter .9s;
 }
-.trio-main:hover img,.trio-frame:hover img,.trio-extra:hover img{
+.trio-main:hover img,.trio-frame:hover img{
   transform:scale(1.04);
   filter:contrast(1.08) brightness(.96) saturate(.95);
 }
@@ -434,10 +424,8 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
   .hero-shade{width:100%;background:linear-gradient(to top,var(--bg) 10%,rgba(10,10,10,.3) 60%,transparent)}
   .hero-title{font-size:clamp(52px,15vw,120px);bottom:22vh;left:4vw}
   .nav ul{display:none}.nav .avail{display:none}
-  .photo-trio{grid-template-columns:1fr;grid-template-rows:auto;padding:60px 20px 0;gap:2px;max-height:none}
-  .trio-main,.trio-extra{aspect-ratio:3/2}
-  .trio-stack{flex-direction:row;gap:2px}
-  .trio-frame{min-height:180px}
+  .photo-trio{grid-template-columns:1fr;grid-template-rows:auto;padding:60px 20px 0;gap:2px;height:auto}
+  .trio-main,.trio-frame{aspect-ratio:3/2}
   .text-block{grid-template-columns:1fr;gap:24px;margin-top:40px;padding:40px 20px 0}
   .series-panels-head{flex-direction:column;align-items:flex-start;gap:16px;margin:0 20px;padding-left:0;padding-right:0}
   .serie-panel-content{flex-direction:column;align-items:flex-start;gap:18px}
@@ -490,14 +478,14 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
 <div class="ticker-band">
   <div class="ticker-row">
     <div class="ticker-inner t-left">
-      <span><b>Japan</b> &mdash; <b>Lanzarote</b> &mdash; <b>Elsewhere</b> &mdash; Tokyo &mdash; Shinjuku &mdash; Nara &mdash; Kyōto &mdash; Timanfaya &mdash; Famara &mdash; NYC &mdash; Oslo &mdash; Hoëdic &mdash; London &mdash; Lithuania &mdash; Paris &mdash;</span>
-      <span><b>Japan</b> &mdash; <b>Lanzarote</b> &mdash; <b>Elsewhere</b> &mdash; Tokyo &mdash; Shinjuku &mdash; Nara &mdash; Kyōto &mdash; Timanfaya &mdash; Famara &mdash; NYC &mdash; Oslo &mdash; Hoëdic &mdash; London &mdash; Lithuania &mdash; Paris &mdash;</span>
+      <span><b>Japan</b> &mdash; <b>Lanzarote</b> &mdash; <b>Elsewhere</b> &mdash; Tokyo &mdash; Shinjuku &mdash; Nara &mdash; Ky&#x14D;to &mdash; Timanfaya &mdash; Famara &mdash; NYC &mdash; Oslo &mdash; Ho&#xEB;dic &mdash; London &mdash; Lithuania &mdash; Paris &mdash;</span>
+      <span><b>Japan</b> &mdash; <b>Lanzarote</b> &mdash; <b>Elsewhere</b> &mdash; Tokyo &mdash; Shinjuku &mdash; Nara &mdash; Ky&#x14D;to &mdash; Timanfaya &mdash; Famara &mdash; NYC &mdash; Oslo &mdash; Ho&#xEB;dic &mdash; London &mdash; Lithuania &mdash; Paris &mdash;</span>
     </div>
   </div>
   <div class="ticker-row">
     <div class="ticker-inner t-right">
-      <span>35°39’N 139°44’E &mdash; 29°01’N 13°33’W &mdash; 48°51’N 2°21’E &mdash; 40°42’N 74°00’W &mdash; 59°54’N 10°44’E &mdash; 47°21’N 2°52’W &mdash; 51°30’N 0°07’W &mdash; 54°41’N 25°17’E &mdash; 28°57’N 13°36’W &mdash;</span>
-      <span>35°39’N 139°44’E &mdash; 29°01’N 13°33’W &mdash; 48°51’N 2°21’E &mdash; 40°42’N 74°00’W &mdash; 59°54’N 10°44’E &mdash; 47°21’N 2°52’W &mdash; 51°30’N 0°07’W &mdash; 54°41’N 25°17’E &mdash; 28°57’N 13°36’W &mdash;</span>
+      <span>35&deg;39'N 139&deg;44'E &mdash; 29&deg;01'N 13&deg;33'W &mdash; 48&deg;51'N 2&deg;21'E &mdash; 40&deg;42'N 74&deg;00'W &mdash; 59&deg;54'N 10&deg;44'E &mdash; 47&deg;21'N 2&deg;52'W &mdash; 51&deg;30'N 0&deg;07'W &mdash; 54&deg;41'N 25&deg;17'E &mdash; 28&deg;57'N 13&deg;36'W &mdash;</span>
+      <span>35&deg;39'N 139&deg;44'E &mdash; 29&deg;01'N 13&deg;33'W &mdash; 48&deg;51'N 2&deg;21'E &mdash; 40&deg;42'N 74&deg;00'W &mdash; 59&deg;54'N 10&deg;44'E &mdash; 47&deg;21'N 2&deg;52'W &mdash; 51&deg;30'N 0&deg;07'W &mdash; 54&deg;41'N 25&deg;17'E &mdash; 28&deg;57'N 13&deg;36'W &mdash;</span>
     </div>
   </div>
 </div>
@@ -512,40 +500,18 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
     </picture>
     <picture></picture>
     <div class="img-mask"></div>
-    <div class="trio-tag"><span class="tn">JA·01</span>Golden Gai &middot; Tokyo</div>
+    <div class="trio-tag"><span class="tn">JA&middot;01</span>Golden Gai &middot; Tokyo</div>
   </a>
-  <a href="series/japan" class="trio-extra rv" data-slot="1" data-sizes="55vw" data-current="site-1-34" style="transition-delay:180ms">
+  <a href="series/lanzarote" class="trio-frame rv" data-slot="1" data-sizes="38vw" data-current="site-1-32" style="transition-delay:180ms">
     <picture class="is-active">
-      <source srcset="uploads/opt/site-1-34-900.avif 900w, uploads/opt/site-1-34-1920.avif 1920w" type="image/avif" sizes="55vw">
-      <source srcset="uploads/opt/site-1-34-900.jpg 900w, uploads/opt/site-1-34-1920.jpg 1920w" type="image/jpeg" sizes="55vw">
-      <img src="uploads/opt/site-1-34-1920.jpg" alt="Between columns · Tokyo" loading="lazy" />
+      <source srcset="uploads/opt/site-1-32-900.avif 900w, uploads/opt/site-1-32-1920.avif 1920w" type="image/avif" sizes="38vw">
+      <source srcset="uploads/opt/site-1-32-900.jpg 900w, uploads/opt/site-1-32-1920.jpg 1920w" type="image/jpeg" sizes="38vw">
+      <img src="uploads/opt/site-1-32-1920.jpg" alt="Route sur la lave · Timanfaya" loading="lazy" />
     </picture>
     <picture></picture>
     <div class="img-mask"></div>
-    <div class="trio-tag"><span class="tn">JA·04</span>Between columns &middot; Tokyo</div>
+    <div class="trio-tag"><span class="tn">LZ&middot;02</span>Route sur la lave &middot; Timanfaya</div>
   </a>
-  <div class="trio-stack">
-    <a href="series/elsewhere" class="trio-frame rv" data-slot="2" data-sizes="38vw" data-current="NY2025-27-1" style="transition-delay:120ms">
-      <picture class="is-active">
-        <source srcset="uploads/opt/NY2025-27-1-900.avif 900w, uploads/opt/NY2025-27-1-1920.avif 1920w" type="image/avif" sizes="38vw">
-        <source srcset="uploads/opt/NY2025-27-1-900.jpg 900w, uploads/opt/NY2025-27-1-1920.jpg 1920w" type="image/jpeg" sizes="38vw">
-        <img src="uploads/opt/NY2025-27-1-1920.jpg" alt="Hoëdic · Après la baignade" loading="lazy" />
-      </picture>
-      <picture></picture>
-      <div class="img-mask"></div>
-      <div class="trio-tag"><span class="tn">EW·03</span>Hoëdic &middot; Après la baignade</div>
-    </a>
-    <a href="series/lanzarote" class="trio-frame rv" data-slot="3" data-sizes="38vw" data-current="site-1-32" style="transition-delay:240ms">
-      <picture class="is-active">
-        <source srcset="uploads/opt/site-1-32-900.avif 900w, uploads/opt/site-1-32-1920.avif 1920w" type="image/avif" sizes="38vw">
-        <source srcset="uploads/opt/site-1-32-900.jpg 900w, uploads/opt/site-1-32-1920.jpg 1920w" type="image/jpeg" sizes="38vw">
-        <img src="uploads/opt/site-1-32-1920.jpg" alt="Route sur la lave · Timanfaya" loading="lazy" />
-      </picture>
-      <picture></picture>
-      <div class="img-mask"></div>
-      <div class="trio-tag"><span class="tn">LZ·02</span>Route sur la lave &middot; Timanfaya</div>
-    </a>
-  </div>
 </section>
 
 <!-- ── Text block ────────────────────────────── -->
@@ -603,7 +569,7 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
     <div class="serie-panel-content">
       <div class="inf">
         <h3>Elsewhere</h3>
-        <div class="meta">NYC &middot; Oslo &middot; Hoëdic &middot; London &middot; Lithuania</div>
+        <div class="meta">NYC &middot; Oslo &middot; Ho&euml;dic &middot; London &middot; Lithuania</div>
       </div>
       <span class="serie-cta">View series &rarr;</span>
     </div>
@@ -614,10 +580,10 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
 <section id="about" class="about rv">
   <div class="quote">
     &ldquo;The photograph already exists before you press the shutter. You just have to find it.&rdquo;
-    <cite>&mdash; Clément Hirson</cite>
+    <cite>&mdash; Cl&eacute;ment Hirson</cite>
   </div>
   <div class="body">
-    <p><strong>Clément Hirson</strong> is a Paris-based amateur photographer. The images seek suspended moments — between seasons, between lights, between words. Japan, Lanzarote, Elsewhere — three bodies of work assembled without hierarchy, as close as possible to lived time.</p>
+    <p><strong>Cl&eacute;ment Hirson</strong> is a Paris-based amateur photographer. The images seek suspended moments — between seasons, between lights, between words. Japan, Lanzarote, Elsewhere — three bodies of work assembled without hierarchy, as close as possible to lived time.</p>
     <p>For print sales or any inquiry, write directly.</p>
     <div class="about-meta">
       <span class="k">Based in</span><span class="v">Paris, FR</span>
@@ -634,7 +600,7 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
     <div class="lk">Email<a href="mailto:clement.hirson@gmail.com">clement.hirson@gmail.com</a></div>
     <div class="lk">Instagram<a href="https://www.instagram.com/clemhirson/" target="_blank" rel="noopener">@clemhirson</a></div>
   </div>
-  <div class="copy">&copy; Clément Hirson &mdash; 2019 / 2026</div>
+  <div class="copy">&copy; Cl&eacute;ment Hirson &mdash; 2019 / 2026</div>
 </footer>
 
 <script>
@@ -655,7 +621,7 @@ if (!matchMedia('(pointer:coarse)').matches) {
     ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
     requestAnimationFrame(tick);
   })();
-  document.querySelectorAll('a,button,.serie-cta,.trio-main,.trio-extra,.trio-frame,.serie-panel').forEach(el => {
+  document.querySelectorAll('a,button,.serie-cta,.trio-main,.trio-frame,.serie-panel').forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('chover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('chover'));
   });
@@ -684,28 +650,45 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
 /* trio shuffle — pool + per-slot interval crossfade */
 const TRIO_POOL = [
-  { base:'JAPO0231',    place:'Golden Gai · Tokyo',           code:'JA·01', series:'japan' },
-  { base:'site-1-19',   place:'Tokyo · Dusk',                 code:'JA·02', series:'japan' },
-  { base:'site-1-27',   place:'Shinjuku · Rain',              code:'JA·03', series:'japan' },
-  { base:'site-1-34',   place:'Between columns · Tokyo',      code:'JA·04', series:'japan' },
-  { base:'site-1-18',   place:'Bar reflection · Tokyo',       code:'JA·05', series:'japan' },
-  { base:'site-1-21',   place:'JR Conductor · White gloves',  code:'JA·06', series:'japan' },
-  { base:'site-1-26',   place:'Red coat · Shibuya',           code:'JA·12', series:'japan' },
-  { base:'site-1-29',   place:'Riders · Tokyo',               code:'JA·14', series:'japan' },
-  { base:'JAPO1433',    place:'Nara · Forest light',          code:'JA·16', series:'japan' },
-  { base:'site-1-9',    place:'Palmiers · Volcans',           code:'LZ·01', series:'lanzarote' },
-  { base:'site-1-32',   place:'Route sur la lave · Timanfaya', code:'LZ·02', series:'lanzarote' },
-  { base:'site-1-4',    place:'Caleta de Famara',             code:'LZ·03', series:'lanzarote' },
-  { base:'site-1-5',    place:'Surfeur · Volcans',            code:'LZ·05', series:'lanzarote' },
-  { base:'site-1-3',    place:'Hoëdic · Calvaire',            code:'EW·01', series:'elsewhere' },
-  { base:'NY2025-15-1', place:'Hoëdic · Le saut',             code:'EW·02', series:'elsewhere' },
-  { base:'NY2025-27-1', place:'Hoëdic · Après la baignade',   code:'EW·03', series:'elsewhere' },
-  { base:'NY2025-11-1', place:'Hoëdic · Lumière dorée',       code:'EW·04', series:'elsewhere' },
-  { base:'site-1-12',   place:'Paris · Seine en crue',        code:'EW·05', series:'elsewhere' },
-  { base:'site-1-11',   place:'NYC · Basketball court',       code:'EW·07', series:'elsewhere' },
-  { base:'site-1-16',   place:'Surfeurs · Munich',            code:'EW·08', series:'elsewhere' }
+  { base:'JAPO0231',    place:'Golden Gai · Tokyo',               code:'JA·01', series:'japan' },
+  { base:'site-1-19',   place:'Tokyo · Dusk',                     code:'JA·02', series:'japan' },
+  { base:'site-1-27',   place:'Shinjuku · Rain',                  code:'JA·03', series:'japan' },
+  { base:'site-1-34',   place:'Between columns · Tokyo',          code:'JA·04', series:'japan' },
+  { base:'site-1-18',   place:'Bar reflection · Tokyo',           code:'JA·05', series:'japan' },
+  { base:'site-1-21',   place:'JR Conductor · White gloves',      code:'JA·06', series:'japan' },
+  { base:'site-1-22',   place:'Child alone · Train',              code:'JA·07', series:'japan' },
+  { base:'site-1-23',   place:'Sailor · Silhouette',              code:'JA·08', series:'japan' },
+  { base:'site-1-17',   place:'Kōenji · Go',                      code:'JA·09', series:'japan' },
+  { base:'site-1-24',   place:'Station master · Interstitial',    code:'JA·10', series:'japan' },
+  { base:'site-1-25',   place:'JR Agent · Platform',              code:'JA·11', series:'japan' },
+  { base:'site-1-26',   place:'Red coat · Shibuya',               code:'JA·12', series:'japan' },
+  { base:'site-1-28',   place:'Sushi master · Counter',           code:'JA·13', series:'japan' },
+  { base:'site-1-29',   place:'Riders · Tokyo',                   code:'JA·14', series:'japan' },
+  { base:'site-1-33',   place:'Parking · Yellow & Green',         code:'JA·15', series:'japan' },
+  { base:'JAPO1433',    place:'Nara · Forest light',              code:'JA·16', series:'japan' },
+  { base:'site-1-9',    place:'Palmiers · Volcans',               code:'LZ·01', series:'lanzarote' },
+  { base:'site-1-32',   place:'Route sur la lave · Timanfaya',    code:'LZ·02', series:'lanzarote' },
+  { base:'site-1-4',    place:'Caleta de Famara · Panier',        code:'LZ·03', series:'lanzarote' },
+  { base:'site-1-6',    place:'L’agriculteur · Tracteur',         code:'LZ·04', series:'lanzarote' },
+  { base:'site-1-5',    place:'Surfeur · Volcans',                code:'LZ·05', series:'lanzarote' },
+  { base:'site-1-7',    place:'Porte en bois · Double exposition', code:'LZ·06', series:'lanzarote' },
+  { base:'site-1-8',    place:'Agaves dans la fumée',             code:'LZ·07', series:'lanzarote' },
+  { base:'site-1-10',   place:'Double exposition · Lanzarote',    code:'LZ·08', series:'lanzarote' },
+  { base:'site-1-3',    place:'Hoëdic · Calvaire',               code:'EW·01', series:'elsewhere' },
+  { base:'NY2025-15-1', place:'Hoëdic · Le saut',               code:'EW·02', series:'elsewhere' },
+  { base:'NY2025-27-1', place:'Hoëdic · Après la baignade',      code:'EW·03', series:'elsewhere' },
+  { base:'NY2025-11-1', place:'Hoëdic · Lumière dorée',          code:'EW·04', series:'elsewhere' },
+  { base:'site-1-12',   place:'Paris · Seine en crue',            code:'EW·05', series:'elsewhere' },
+  { base:'site-1',      place:'NYC · Hot-dogs de nuit',           code:'EW·06', series:'elsewhere' },
+  { base:'site-1-11',   place:'NYC · Basketball court',           code:'EW·07', series:'elsewhere' },
+  { base:'site-1-30',   place:'Portrait urbain · Rideau de fer',  code:'EW·08', series:'elsewhere' },
+  { base:'site-1-2',    place:'Oslo · Jetée enneigée',            code:'EW·09', series:'elsewhere' },
+  { base:'site-1-16',   place:'Surfeurs · Contre-jour',           code:'EW·10', series:'elsewhere' },
+  { base:'site-1-13',   place:'Londres · Ouvriers',               code:'EW·11', series:'elsewhere' },
+  { base:'site-1-31',   place:'Vitre givrée · Portrait',          code:'EW·12', series:'elsewhere' },
+  { base:'site-1-14',   place:'Lituanie · Dans l’eau',            code:'EW·13', series:'elsewhere' }
 ];
-const TRIO_INTERVALS = [3000, 3500, 4000, 3200];
+const TRIO_INTERVALS = [3000, 3500];
 function trioPicHTML(item, sizes) {
   return `<source srcset="uploads/opt/${item.base}-900.avif 900w, uploads/opt/${item.base}-1920.avif 1920w" type="image/avif" sizes="${sizes}">`
        + `<source srcset="uploads/opt/${item.base}-900.jpg 900w, uploads/opt/${item.base}-1920.jpg 1920w" type="image/jpeg" sizes="${sizes}">`
