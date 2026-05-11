@@ -276,6 +276,11 @@ body.chover .cur-ring[data-label]::after{opacity:1}
   flex:1;min-height:200px;
   position:relative;overflow:hidden;background:var(--bg2);
 }
+.trio-main picture,.trio-frame picture,.trio-extra picture{
+  position:absolute;inset:0;display:block;
+  opacity:0;transition:opacity .8s ease-in-out;
+}
+.trio-main picture.is-active,.trio-frame picture.is-active,.trio-extra picture.is-active{opacity:1}
 .trio-main img,.trio-frame img,.trio-extra img{
   width:100%;height:100%;object-fit:cover;
   filter:contrast(1.06) brightness(.9) saturate(.88);
@@ -499,42 +504,46 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
 
 <!-- ── Photo trio ─────────────────────────────── -->
 <section id="index" class="photo-trio">
-  <a href="series/japan" class="trio-main rv" style="transition-delay:0ms">
-    <picture>
+  <a href="series/japan" class="trio-main rv" data-slot="0" data-sizes="55vw" data-current="JAPO0231" style="transition-delay:0ms">
+    <picture class="is-active">
       <source srcset="uploads/opt/JAPO0231-900.avif 900w, uploads/opt/JAPO0231-1920.avif 1920w" type="image/avif" sizes="55vw">
       <source srcset="uploads/opt/JAPO0231-900.jpg 900w, uploads/opt/JAPO0231-1920.jpg 1920w" type="image/jpeg" sizes="55vw">
-      <img src="uploads/opt/JAPO0231-1920.jpg" alt="Golden Gai, Tokyo" loading="lazy" />
+      <img src="uploads/opt/JAPO0231-1920.jpg" alt="Golden Gai · Tokyo" loading="lazy" />
     </picture>
+    <picture></picture>
     <div class="img-mask"></div>
-    <div class="trio-tag"><span class="tn">01</span>Golden Gai &middot; Tokyo</div>
+    <div class="trio-tag"><span class="tn">JA·01</span>Golden Gai &middot; Tokyo</div>
   </a>
-  <a href="series/japan" class="trio-extra rv" style="transition-delay:180ms">
-    <picture>
+  <a href="series/japan" class="trio-extra rv" data-slot="1" data-sizes="55vw" data-current="site-1-34" style="transition-delay:180ms">
+    <picture class="is-active">
       <source srcset="uploads/opt/site-1-34-900.avif 900w, uploads/opt/site-1-34-1920.avif 1920w" type="image/avif" sizes="55vw">
       <source srcset="uploads/opt/site-1-34-900.jpg 900w, uploads/opt/site-1-34-1920.jpg 1920w" type="image/jpeg" sizes="55vw">
-      <img src="uploads/opt/site-1-34-1920.jpg" alt="Between columns, Tokyo" loading="lazy" />
+      <img src="uploads/opt/site-1-34-1920.jpg" alt="Between columns · Tokyo" loading="lazy" />
     </picture>
+    <picture></picture>
     <div class="img-mask"></div>
-    <div class="trio-tag"><span class="tn">04</span>Between columns &middot; Tokyo</div>
+    <div class="trio-tag"><span class="tn">JA·04</span>Between columns &middot; Tokyo</div>
   </a>
   <div class="trio-stack">
-    <a href="series/elsewhere" class="trio-frame rv" style="transition-delay:120ms">
-      <picture>
+    <a href="series/elsewhere" class="trio-frame rv" data-slot="2" data-sizes="38vw" data-current="NY2025-27-1" style="transition-delay:120ms">
+      <picture class="is-active">
         <source srcset="uploads/opt/NY2025-27-1-900.avif 900w, uploads/opt/NY2025-27-1-1920.avif 1920w" type="image/avif" sizes="38vw">
         <source srcset="uploads/opt/NY2025-27-1-900.jpg 900w, uploads/opt/NY2025-27-1-1920.jpg 1920w" type="image/jpeg" sizes="38vw">
-        <img src="uploads/opt/NY2025-27-1-1920.jpg" alt="After the swim, Hoëdic" loading="lazy" />
+        <img src="uploads/opt/NY2025-27-1-1920.jpg" alt="Hoëdic · Après la baignade" loading="lazy" />
       </picture>
+      <picture></picture>
       <div class="img-mask"></div>
-      <div class="trio-tag"><span class="tn">02</span>Hoëdic &middot; Bretagne</div>
+      <div class="trio-tag"><span class="tn">EW·03</span>Hoëdic &middot; Après la baignade</div>
     </a>
-    <a href="series/lanzarote" class="trio-frame rv" style="transition-delay:240ms">
-      <picture>
+    <a href="series/lanzarote" class="trio-frame rv" data-slot="3" data-sizes="38vw" data-current="site-1-32" style="transition-delay:240ms">
+      <picture class="is-active">
         <source srcset="uploads/opt/site-1-32-900.avif 900w, uploads/opt/site-1-32-1920.avif 1920w" type="image/avif" sizes="38vw">
         <source srcset="uploads/opt/site-1-32-900.jpg 900w, uploads/opt/site-1-32-1920.jpg 1920w" type="image/jpeg" sizes="38vw">
-        <img src="uploads/opt/site-1-32-1920.jpg" alt="Lava road, Timanfaya" loading="lazy" />
+        <img src="uploads/opt/site-1-32-1920.jpg" alt="Route sur la lave · Timanfaya" loading="lazy" />
       </picture>
+      <picture></picture>
       <div class="img-mask"></div>
-      <div class="trio-tag"><span class="tn">03</span>Timanfaya &middot; Lanzarote</div>
+      <div class="trio-tag"><span class="tn">LZ·02</span>Route sur la lave &middot; Timanfaya</div>
     </a>
   </div>
 </section>
@@ -672,6 +681,67 @@ const io = new IntersectionObserver(entries => {
   });
 }, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+/* trio shuffle — pool + per-slot interval crossfade */
+const TRIO_POOL = [
+  { base:'JAPO0231',    place:'Golden Gai · Tokyo',           code:'JA·01', series:'japan' },
+  { base:'site-1-19',   place:'Tokyo · Dusk',                 code:'JA·02', series:'japan' },
+  { base:'site-1-27',   place:'Shinjuku · Rain',              code:'JA·03', series:'japan' },
+  { base:'site-1-34',   place:'Between columns · Tokyo',      code:'JA·04', series:'japan' },
+  { base:'site-1-18',   place:'Bar reflection · Tokyo',       code:'JA·05', series:'japan' },
+  { base:'site-1-21',   place:'JR Conductor · White gloves',  code:'JA·06', series:'japan' },
+  { base:'site-1-26',   place:'Red coat · Shibuya',           code:'JA·12', series:'japan' },
+  { base:'site-1-29',   place:'Riders · Tokyo',               code:'JA·14', series:'japan' },
+  { base:'JAPO1433',    place:'Nara · Forest light',          code:'JA·16', series:'japan' },
+  { base:'site-1-9',    place:'Palmiers · Volcans',           code:'LZ·01', series:'lanzarote' },
+  { base:'site-1-32',   place:'Route sur la lave · Timanfaya', code:'LZ·02', series:'lanzarote' },
+  { base:'site-1-4',    place:'Caleta de Famara',             code:'LZ·03', series:'lanzarote' },
+  { base:'site-1-5',    place:'Surfeur · Volcans',            code:'LZ·05', series:'lanzarote' },
+  { base:'site-1-3',    place:'Hoëdic · Calvaire',            code:'EW·01', series:'elsewhere' },
+  { base:'NY2025-15-1', place:'Hoëdic · Le saut',             code:'EW·02', series:'elsewhere' },
+  { base:'NY2025-27-1', place:'Hoëdic · Après la baignade',   code:'EW·03', series:'elsewhere' },
+  { base:'NY2025-11-1', place:'Hoëdic · Lumière dorée',       code:'EW·04', series:'elsewhere' },
+  { base:'site-1-12',   place:'Paris · Seine en crue',        code:'EW·05', series:'elsewhere' },
+  { base:'site-1-11',   place:'NYC · Basketball court',       code:'EW·07', series:'elsewhere' },
+  { base:'site-1-16',   place:'Surfeurs · Munich',            code:'EW·08', series:'elsewhere' }
+];
+const TRIO_INTERVALS = [3000, 3500, 4000, 3200];
+function trioPicHTML(item, sizes) {
+  return `<source srcset="uploads/opt/${item.base}-900.avif 900w, uploads/opt/${item.base}-1920.avif 1920w" type="image/avif" sizes="${sizes}">`
+       + `<source srcset="uploads/opt/${item.base}-900.jpg 900w, uploads/opt/${item.base}-1920.jpg 1920w" type="image/jpeg" sizes="${sizes}">`
+       + `<img src="uploads/opt/${item.base}-1920.jpg" alt="${item.place}" loading="lazy" />`;
+}
+(function initTrioShuffle(){
+  const slots = document.querySelectorAll('.photo-trio [data-slot]');
+  if (!slots.length) return;
+  slots.forEach((slot, idx) => {
+    const sizes = slot.dataset.sizes;
+    setInterval(() => {
+      const used = new Set(Array.from(slots).map(s => s.dataset.current));
+      const candidates = TRIO_POOL.filter(p => !used.has(p.base));
+      if (!candidates.length) return;
+      const next = candidates[Math.floor(Math.random() * candidates.length)];
+      const pics = slot.querySelectorAll('picture');
+      const active = slot.querySelector('picture.is-active');
+      const inactive = active === pics[0] ? pics[1] : pics[0];
+      inactive.innerHTML = trioPicHTML(next, sizes);
+      const swap = () => {
+        inactive.classList.add('is-active');
+        active.classList.remove('is-active');
+        slot.dataset.current = next.base;
+        slot.href = 'series/' + next.series;
+        const tag = slot.querySelector('.trio-tag');
+        if (tag) tag.innerHTML = `<span class="tn">${next.code}</span>${next.place}`;
+      };
+      const newImg = inactive.querySelector('img');
+      if (newImg.complete && newImg.naturalWidth) swap();
+      else {
+        newImg.addEventListener('load', swap, { once: true });
+        newImg.addEventListener('error', () => {}, { once: true });
+      }
+    }, TRIO_INTERVALS[idx]);
+  });
+})();
 </script>
 </body>
 </html>
