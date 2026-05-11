@@ -8,19 +8,19 @@
 <meta name="author" content="Clément Hirson" />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <meta name="theme-color" content="#0a0a0a" />
-<link rel="canonical" href="https://lenstraveler.fr/series.html" />
+<link rel="canonical" href="https://www.lenstraveler.fr/series.html" />
 
 <!-- Open Graph (updated dynamically by JS for each series) -->
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Interlude" />
 <meta property="og:title" content="Interlude — Series" />
 <meta property="og:description" content="A documentary photography series by Clément Hirson." />
-<meta property="og:url" content="https://lenstraveler.fr/series.html" />
-<meta property="og:image" content="https://lenstraveler.fr/uploads/opt/site-1-9-1920.jpg" />
+<meta property="og:url" content="https://www.lenstraveler.fr/series.html" />
+<meta property="og:image" content="https://www.lenstraveler.fr/uploads/opt/site-1-9-1920.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Interlude — Series" />
 <meta name="twitter:description" content="A documentary photography series by Clément Hirson." />
-<meta name="twitter:image" content="https://lenstraveler.fr/uploads/opt/site-1-9-1920.jpg" />
+<meta name="twitter:image" content="https://www.lenstraveler.fr/uploads/opt/site-1-9-1920.jpg" />
 
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
@@ -344,8 +344,8 @@ function buildPage(allSeries) {
   const nextSerie = allSeries[nextKey];
 
   /* header + SEO */
-  const seriesUrl = 'https://lenstraveler.fr/series.html?s=' + key;
-  const coverAbs  = 'https://lenstraveler.fr/uploads/opt/' + raw.cover.replace(/\.(jpe?g|png)$/i,'') + '-1920.jpg';
+  const seriesUrl = 'https://www.lenstraveler.fr/series.html?s=' + key;
+  const coverAbs  = 'https://www.lenstraveler.fr/uploads/opt/' + raw.cover.replace(/\.(jpe?g|png)$/i,'') + '-1920.jpg';
   const seriesDesc = `${raw.title} — a documentary photography series by Clément Hirson. ${photos.length} frames from ${raw.loc}.`;
   document.title = 'Interlude — ' + raw.title;
   document.querySelector('meta[name="description"]').setAttribute('content', seriesDesc);
@@ -368,7 +368,7 @@ function buildPage(allSeries) {
     "description": seriesDesc,
     "url": seriesUrl,
     "image": coverAbs,
-    "author": { "@type":"Person", "name":"Clément Hirson", "url":"https://lenstraveler.fr/" },
+    "author": { "@type":"Person", "name":"Clément Hirson", "url":"https://www.lenstraveler.fr/" },
     "numberOfItems": photos.length
   });
   document.head.appendChild(ld);
