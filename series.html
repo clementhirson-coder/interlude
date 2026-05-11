@@ -330,7 +330,8 @@ function picHTML(src, alt, sizes, extra='') {
 
 /* ── build page from data ────────────────────── */
 function buildPage(allSeries) {
-  const key = (new URLSearchParams(location.search).get('s') || Object.keys(allSeries)[0]).toLowerCase();
+  const pathMatch = location.pathname.match(/\/series\/(japan|lanzarote|elsewhere)/i);
+  const key = (pathMatch ? pathMatch[1] : new URLSearchParams(location.search).get('s') || Object.keys(allSeries)[0]).toLowerCase();
   const raw = allSeries[key] || allSeries[Object.keys(allSeries)[0]];
 
   /* normalise photos: data.json uses {file} → build {src} */
@@ -344,7 +345,7 @@ function buildPage(allSeries) {
   const nextSerie = allSeries[nextKey];
 
   /* header + SEO */
-  const seriesUrl = 'https://www.lenstraveler.fr/series.html?s=' + key;
+  const seriesUrl = 'https://www.lenstraveler.fr/series/' + key;
   const coverAbs  = 'https://www.lenstraveler.fr/uploads/opt/' + raw.cover.replace(/\.(jpe?g|png)$/i,'') + '-1920.jpg';
   const seriesDesc = `${raw.title} — a documentary photography series by Clément Hirson. ${photos.length} frames from ${raw.loc}.`;
   document.title = 'Interlude — ' + raw.title;
@@ -488,7 +489,7 @@ if(!matchMedia('(pointer:coarse)').matches){
 }
 
 /* ── load ────────────────────────────────────── */
-window.addEventListener('load',()=>document.body.classList.add('loaded'));
+document.addEventListener('DOMContentLoaded',()=>document.body.classList.add('loaded'));
 </script>
 </body>
 </html>
