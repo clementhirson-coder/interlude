@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PayPOS — One Terminal. Every Payment.</title>
+<meta name="description" content="PayPOS centralise tous vos moyens de paiement en un seul terminal Android." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --accent: #00d4ff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg);
+    color: #fff;
+    font-family: "Manrope", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Pinned hero stage */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 720px;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  /* Glow behind terminal */
+  .terminal-glow {
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    width: 720px;
+    height: 720px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.10) 0%, rgba(0, 212, 255, 0.04) 35%, transparent 70%);
+    pointer-events: none;
+    will-change: opacity, transform;
+    z-index: 1;
+  }
+
+  /* Terminal */
+  .terminal-wrap {
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    width: clamp(260px, 32vw, 460px);
+    will-change: transform, filter;
+    filter: drop-shadow(0 0 0px rgba(0, 212, 255, 0));
+    transition: filter 0.4s ease;
+  }
+  .terminal-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    mix-blend-mode: screen;
+  }
+  .terminal-wrap.pulse {
+    filter: drop-shadow(0 0 60px rgba(0, 212, 255, 0.7));
+  }
+
+  /* Terminal screen overlay (where absorbed icons appear) */
+  .terminal-screen {
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 58%;
+    height: 38%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 4px;
+    align-items: center;
+    justify-items: center;
+    pointer-events: none;
+  }
+  .screen-icon {
+    font-size: clamp(14px, 1.4vw, 22px);
+    opacity: 0;
+    transform: scale(0.4);
+    color: var(--accent);
+    text-shadow: 0 0 8px rgba(0, 212, 255, 0.8);
+    will-change: opacity, transform;
+  }
+
+  /* Product cards */
+  .product-card {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    will-change: transform, opacity;
+    z-index: 4;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .product-card .icon {
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  /* Default desktop positions */
+  .pos-top-left      { top: 14%; left: 6%; }
+  .pos-top-right     { top: 14%; right: 6%; }
+  .pos-middle-left   { top: 48%; left: 3%; transform: translateY(-50%); }
+  .pos-middle-right  { top: 48%; right: 3%; transform: translateY(-50%); }
+  .pos-bottom-left   { bottom: 14%; left: 6%; }
+  .pos-bottom-right  { bottom: 14%; right: 6%; }
+
+  /* Headline */
+  .hero-copy {
+    position: absolute;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 5;
+    width: min(92vw, 900px);
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+  .hero-h1 {
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 1.02;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+  .hero-subtitle {
+    margin-top: 28px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: clamp(15px, 1.2vw, 18px);
+    font-weight: 400;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    transform: translateY(12px);
+    will-change: opacity, transform;
+  }
+
+  /* Static fallback (mobile) */
+  .hero-mobile {
+    display: none;
+  }
+  @media (max-width: 767px) {
+    .hero { height: auto; min-height: 0; padding: 80px 20px 60px; }
+    .hero-copy { position: static; transform: none; margin-bottom: 32px; }
+    .terminal-glow,
+    .terminal-wrap,
+    .product-card { display: none; }
+    .hero-subtitle { opacity: 1; transform: none; }
+    .hero-mobile {
+      display: block;
+      margin-top: 24px;
+    }
+    .hero-mobile .terminal-mobile {
+      width: clamp(220px, 70vw, 320px);
+      margin: 0 auto 36px;
+      display: block;
+      mix-blend-mode: screen;
+    }
+    .hero-mobile .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .hero-mobile .product-static {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .hero-mobile .product-static .icon { font-size: 20px; }
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    z-index: 5;
+  }
+  @media (max-width: 767px) { .scroll-hint { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- Scroll spacer wraps the hero to give it scroll range while pinned -->
+<section id="scroll-container" style="position: relative;">
+  <div class="hero" id="hero">
+
+    <!-- Headline -->
+    <div class="hero-copy">
+      <span class="hero-tag">Next-Gen Payment Terminal</span>
+      <h1 class="hero-h1">One Terminal.<br/>Every Payment.</h1>
+      <p class="hero-subtitle" id="hero-subtitle">
+        PayPOS centralise tous vos moyens de paiement en un seul terminal Android.
+      </p>
+    </div>
+
+    <!-- Glow -->
+    <div class="terminal-glow" id="terminal-glow"></div>
+
+    <!-- Terminal -->
+    <div class="terminal-wrap" id="terminal">
+      <img src="/public/devices6.png" alt="PayPOS terminal" onerror="this.onerror=null;this.src='devices6.png';" />
+      <div class="terminal-screen" id="terminal-screen">
+        <span class="screen-icon" data-screen="0">🔗</span>
+        <span class="screen-icon" data-screen="1">💳</span>
+        <span class="screen-icon" data-screen="2">⚡</span>
+        <span class="screen-icon" data-screen="3">🛡️</span>
+        <span class="screen-icon" data-screen="4">₿</span>
+        <span class="screen-icon" data-screen="5">🏦</span>
+      </div>
+    </div>
+
+    <!-- Product cards -->
+    <div class="product-card pos-top-left"     data-index="0"><span class="icon">🔗</span><span>PayByLink</span></div>
+    <div class="product-card pos-top-right"    data-index="1"><span class="icon">💳</span><span>BNPL &amp; Credit</span></div>
+    <div class="product-card pos-middle-left"  data-index="2"><span class="icon">⚡</span><span>Wero</span></div>
+    <div class="product-card pos-middle-right" data-index="3"><span class="icon">🛡️</span><span>NoShow</span></div>
+    <div class="product-card pos-bottom-left"  data-index="4"><span class="icon">₿</span><span>Crypto</span></div>
+    <div class="product-card pos-bottom-right" data-index="5"><span class="icon">🏦</span><span>A2A &amp; Wallets</span></div>
+
+    <!-- Mobile static fallback -->
+    <div class="hero-mobile">
+      <img class="terminal-mobile" src="/public/devices6.png" alt="PayPOS terminal" onerror="this.onerror=null;this.src='devices6.png';" />
+      <div class="grid-cards">
+        <div class="product-static"><span class="icon">🔗</span><span>PayByLink</span></div>
+        <div class="product-static"><span class="icon">💳</span><span>BNPL &amp; Credit</span></div>
+        <div class="product-static"><span class="icon">⚡</span><span>Wero</span></div>
+        <div class="product-static"><span class="icon">🛡️</span><span>NoShow</span></div>
+        <div class="product-static"><span class="icon">₿</span><span>Crypto</span></div>
+        <div class="product-static"><span class="icon">🏦</span><span>A2A &amp; Wallets</span></div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">Scroll</div>
+  </div>
+</section>
+
+<!-- Filler content after hero so we can see the unpin -->
+<section style="height: 60vh; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.4); font-family: 'Manrope', sans-serif;">
+  <div style="text-align:center;">
+    <div style="font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;">Continue</div>
+    <div style="font-size: 28px; font-weight: 600; color: rgba(255,255,255,0.85);">Découvrez nos solutions →</div>
+  </div>
+</section>
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
+
+  // Capture original card positions so we can compute curved paths to the terminal.
+  function buildAnimation() {
+    if (isMobile()) return;
+
+    const hero          = document.getElementById("hero");
+    const terminal      = document.getElementById("terminal");
+    const glow          = document.getElementById("terminal-glow");
+    const subtitle      = document.getElementById("hero-subtitle");
+    const cards         = gsap.utils.toArray(".product-card");
+    const screenIcons   = gsap.utils.toArray(".screen-icon");
+
+    // Continuous subtle float on terminal (independent of scroll).
+    gsap.to(terminal, {
+      y: "-=14",
+      duration: 3,
+      ease: "sine.inOut",
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Subtle glow breathing.
+    gsap.to(glow, {
+      scale: 1.06,
+      opacity: 0.85,
+      duration: 4,
+      ease: "sine.inOut",
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Compute terminal center vs each card center in viewport-relative space.
+    const compute = () => {
+      const tRect = terminal.getBoundingClientRect();
+      const targetX = tRect.left + tRect.width / 2;
+      const targetY = tRect.top + tRect.height / 2;
+
+      cards.forEach((card) => {
+        const cRect = card.getBoundingClientRect();
+        const startX = cRect.left + cRect.width / 2;
+        const startY = cRect.top + cRect.height / 2;
+        card.dataset.dx = targetX - startX;
+        card.dataset.dy = targetY - startY;
+      });
+    };
+    compute();
+    window.addEventListener("resize", () => {
+      compute();
+      ScrollTrigger.refresh();
+    });
+
+    // Master scrub timeline pinned to the hero.
+    // We give the hero ~ (cards * 120px) + buffer of scroll distance.
+    const stepPx = 120;
+    const totalScroll = cards.length * stepPx + 240;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: hero,
+        start: "top top",
+        end: `+=${totalScroll}`,
+        pin: true,
+        scrub: 1,
+        anticipatePin: 1,
+      },
+      defaults: { ease: "none" },
+    });
+
+    // Initial cards-in (small intro window so they fade up at their floating spots).
+    cards.forEach((card, i) => {
+      tl.fromTo(card,
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.05 },
+        i * 0.005
+      );
+    });
+
+    // Per-card absorb sequence. Each card consumes one "step" in the scrub timeline.
+    cards.forEach((card, i) => {
+      const dx = parseFloat(card.dataset.dx || 0);
+      const dy = parseFloat(card.dataset.dy || 0);
+
+      // Curve control: bend the path so it arcs into the terminal.
+      // Choose curvature perpendicular to (dx, dy).
+      const len = Math.hypot(dx, dy) || 1;
+      const perpX = -dy / len;
+      const perpY =  dx / len;
+      const bend  = Math.min(160, len * 0.25) * (i % 2 === 0 ? 1 : -1);
+      const cx = dx * 0.5 + perpX * bend;
+      const cy = dy * 0.5 + perpY * bend;
+
+      const base = 0.1 + i * 0.16;
+
+      // Fly along quadratic bezier (approximated via motionPath relative offsets).
+      tl.to(card, {
+        duration: 0.10,
+        ease: "power2.in",
+        motionPath: {
+          path: [
+            { x: 0,  y: 0  },
+            { x: cx, y: cy },
+            { x: dx, y: dy },
+          ],
+          curviness: 1.5,
+        },
+      }, base);
+
+      // Shrink on contact (last ~30% of the fly).
+      tl.to(card, {
+        scale: 0,
+        opacity: 0,
+        duration: 0.04,
+        ease: "power2.in",
+      }, base + 0.08);
+
+      // Terminal glow pulse.
+      tl.to(terminal, {
+        keyframes: [
+          { filter: "drop-shadow(0 0 80px rgba(0,212,255,0.9))", duration: 0.03 },
+          { filter: "drop-shadow(0 0 0px rgba(0,212,255,0))",   duration: 0.07 },
+        ],
+      }, base + 0.07);
+
+      tl.to(glow, {
+        keyframes: [
+          { scale: 1.25, opacity: 1, duration: 0.03 },
+          { scale: 1.0,  opacity: 0.85, duration: 0.07 },
+        ],
+      }, base + 0.07);
+
+      // Reveal absorbed icon on the terminal screen.
+      tl.to(screenIcons[i], {
+        opacity: 1,
+        scale: 1,
+        duration: 0.05,
+        ease: "back.out(2)",
+      }, base + 0.10);
+    });
+
+    // Subtitle reveal after all absorbed.
+    tl.to(subtitle, {
+      opacity: 1,
+      y: 0,
+      duration: 0.12,
+      ease: "power2.out",
+    }, ">-0.02");
+  }
+
+  // Run once on load.
+  window.addEventListener("load", buildAnimation);
+</script>
+</body>
+</html>
