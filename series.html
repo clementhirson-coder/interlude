@@ -219,6 +219,38 @@ body.chover .cur-ring::after{opacity:1}
 }
 .about-strip .series-txt p+p{margin-top:14px}
 
+/* ── SEO strip (discreet) ──────────────────── */
+.seo-strip{
+  max-width:760px;
+  margin:120px auto 0;
+  padding:0 var(--pad) 80px;
+  border-top:1px solid var(--line);
+  padding-top:40px;
+}
+.seo-strip .seo-h2{
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:400;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--dim);
+  margin-bottom:18px;
+}
+.seo-strip .seo-body{
+  font-family:var(--sans);
+  font-size:13px;
+  line-height:1.85;
+  letter-spacing:.04em;
+  font-weight:300;
+  color:#888;
+  max-width:64ch;
+}
+@media(max-width:600px){
+  .seo-strip{margin-top:60px;padding-bottom:40px}
+  .seo-strip .seo-h2{font-size:10px;letter-spacing:.28em}
+  .seo-strip .seo-body{font-size:12px;line-height:1.75}
+}
+
 /* ── footer ────────────────────────────────── */
 footer{
   padding:28px var(--pad);border-top:1px solid var(--line);
@@ -306,6 +338,12 @@ footer .next-series:hover{gap:18px}
   <div class="series-txt" id="series-txt"></div>
 </div>
 
+<!-- SEO content (discreet) -->
+<section class="seo-strip" id="seo-strip" aria-label="About this series">
+  <h2 class="seo-h2" id="seo-h2"></h2>
+  <p class="seo-body" id="seo-body"></p>
+</section>
+
 <!-- footer -->
 <footer>
   <span style="color:var(--dim)">&copy; Clément Hirson &mdash; 2019 / 2026</span>
@@ -375,6 +413,13 @@ function buildPage(allSeries) {
   document.head.appendChild(ld);
   document.getElementById('nav-brand').textContent  = raw.title;
   document.getElementById('nav-count').textContent  = photos.length + ' photographs';
+  /* SEO strip content */
+  if (raw.seo) {
+    document.getElementById('seo-h2').textContent   = raw.seo.h2;
+    document.getElementById('seo-body').textContent = raw.seo.body;
+  } else {
+    document.getElementById('seo-strip').style.display = 'none';
+  }
   document.getElementById('sh-cover').innerHTML     = picHTML(coverSrc, raw.title, '100vw');
   document.getElementById('sh-num').textContent     = raw.num;
   document.getElementById('sh-title').textContent   = raw.title;
