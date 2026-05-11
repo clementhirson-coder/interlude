@@ -437,6 +437,15 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
   footer .copy{text-align:left}
 }
 </style>
+
+<!-- Google Analytics GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KBSVF3YMD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4KBSVF3YMD');
+</script>
 </head>
 <body>
 
@@ -595,7 +604,7 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
   </div>
 </section>
 
-<!-- ── Footer ──────────────────────────────────── -->
+<!-- ── Footer ────────────────────────────────── -->
 <footer id="contact">
   <div class="mark">Interlude</div>
   <div class="links">
@@ -660,7 +669,7 @@ const TRIO_POOL = [
   { base:'site-1-21',   place:'JR Conductor · White gloves',      code:'JA·06', series:'japan' },
   { base:'site-1-22',   place:'Child alone · Train',              code:'JA·07', series:'japan' },
   { base:'site-1-23',   place:'Sailor · Silhouette',              code:'JA·08', series:'japan' },
-  { base:'site-1-17',   place:'Kōenji · Go',                      code:'JA·09', series:'japan' },
+  { base:'site-1-17',   place:'Kōenji · Go',                 code:'JA·09', series:'japan' },
   { base:'site-1-24',   place:'Station master · Interstitial',    code:'JA·10', series:'japan' },
   { base:'site-1-25',   place:'JR Agent · Platform',              code:'JA·11', series:'japan' },
   { base:'site-1-26',   place:'Red coat · Shibuya',               code:'JA·12', series:'japan' },
@@ -671,24 +680,24 @@ const TRIO_POOL = [
   { base:'site-1-9',    place:'Palmiers · Volcans',               code:'LZ·01', series:'lanzarote' },
   { base:'site-1-32',   place:'Route sur la lave · Timanfaya',    code:'LZ·02', series:'lanzarote' },
   { base:'site-1-4',    place:'Caleta de Famara · Panier',        code:'LZ·03', series:'lanzarote' },
-  { base:'site-1-6',    place:'L’agriculteur · Tracteur',         code:'LZ·04', series:'lanzarote' },
+  { base:'site-1-6',    place:'L’agriculteur · Tracteur',    code:'LZ·04', series:'lanzarote' },
   { base:'site-1-5',    place:'Surfeur · Volcans',                code:'LZ·05', series:'lanzarote' },
-  { base:'site-1-7',    place:'Porte en bois · Double exposition', code:'LZ·06', series:'lanzarote' },
+  { base:'site-1-7',    place:'Porte en bois · Double exposition',code:'LZ·06', series:'lanzarote' },
   { base:'site-1-8',    place:'Agaves dans la fumée',             code:'LZ·07', series:'lanzarote' },
   { base:'site-1-10',   place:'Double exposition · Lanzarote',    code:'LZ·08', series:'lanzarote' },
-  { base:'site-1-3',    place:'Hoëdic · Calvaire',               code:'EW·01', series:'elsewhere' },
-  { base:'NY2025-15-1', place:'Hoëdic · Le saut',               code:'EW·02', series:'elsewhere' },
-  { base:'NY2025-27-1', place:'Hoëdic · Après la baignade',      code:'EW·03', series:'elsewhere' },
-  { base:'NY2025-11-1', place:'Hoëdic · Lumière dorée',          code:'EW·04', series:'elsewhere' },
+  { base:'site-1-3',    place:'Hoëdic · Calvaire',           code:'EW·01', series:'elsewhere' },
+  { base:'NY2025-15-1', place:'Hoëdic · Le saut',            code:'EW·02', series:'elsewhere' },
+  { base:'NY2025-27-1', place:'Hoëdic · Après la baignade', code:'EW·03', series:'elsewhere' },
+  { base:'NY2025-11-1', place:'Hoëdic · Lumière dorée', code:'EW·04', series:'elsewhere' },
   { base:'site-1-12',   place:'Paris · Seine en crue',            code:'EW·05', series:'elsewhere' },
   { base:'site-1',      place:'NYC · Hot-dogs de nuit',           code:'EW·06', series:'elsewhere' },
   { base:'site-1-11',   place:'NYC · Basketball court',           code:'EW·07', series:'elsewhere' },
   { base:'site-1-30',   place:'Portrait urbain · Rideau de fer',  code:'EW·08', series:'elsewhere' },
-  { base:'site-1-2',    place:'Oslo · Jetée enneigée',            code:'EW·09', series:'elsewhere' },
+  { base:'site-1-2',    place:'Oslo · Jetée enneigée',  code:'EW·09', series:'elsewhere' },
   { base:'site-1-16',   place:'Surfeurs · Contre-jour',           code:'EW·10', series:'elsewhere' },
   { base:'site-1-13',   place:'Londres · Ouvriers',               code:'EW·11', series:'elsewhere' },
-  { base:'site-1-31',   place:'Vitre givrée · Portrait',          code:'EW·12', series:'elsewhere' },
-  { base:'site-1-14',   place:'Lituanie · Dans l’eau',            code:'EW·13', series:'elsewhere' }
+  { base:'site-1-31',   place:'Vitre givrée · Portrait',     code:'EW·12', series:'elsewhere' },
+  { base:'site-1-14',   place:'Lituanie · Dans l’eau',       code:'EW·13', series:'elsewhere' }
 ];
 const TRIO_INTERVALS = [3000, 4000];
 function trioPicHTML(item, sizes) {
