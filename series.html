@@ -86,7 +86,7 @@ body.chover .cur-ring::after{opacity:1}
 .nav .meta .series-title{opacity:1}
 .nav .meta .count{opacity:.54}
 
-/* ── series header ─────────────────────────── */
+/* ── series header ──────────────────────────────────── */
 .series-header{
   min-height:100svh;position:relative;overflow:hidden;
   display:flex;align-items:flex-end;
@@ -118,7 +118,7 @@ body.chover .cur-ring::after{opacity:1}
 }
 .sh-right strong{color:var(--fg);font-weight:400}
 
-/* ── meta bar ──────────────────────────────── */
+/* ── meta bar ───────────────────────────────────────────── */
 .meta-bar{
   display:flex;justify-content:space-between;align-items:center;
   padding:16px var(--pad);
@@ -130,7 +130,7 @@ body.chover .cur-ring::after{opacity:1}
 .meta-bar .prog-track{width:80px;height:1px;background:var(--line)}
 .meta-bar .prog-fill{height:1px;background:var(--fg);transition:width .6s}
 
-/* ── gallery grid ──────────────────────────── */
+/* ── gallery grid ──────────────────────────────────────────── */
 .gallery{
   padding:3px var(--pad) 120px;
   columns:3;column-gap:3px;
@@ -165,7 +165,7 @@ body.chover .cur-ring::after{opacity:1}
   transition:opacity 1s cubic-bezier(.22,.61,.36,1),transform 1s cubic-bezier(.22,.61,.36,1)}
 .gitem.in{opacity:1;transform:none}
 
-/* ── lightbox ──────────────────────────────── */
+/* ── lightbox ────────────────────────────────────────────── */
 .lb{
   position:fixed;inset:0;z-index:600;
   background:rgba(8,8,8,.97);
@@ -204,7 +204,7 @@ body.chover .cur-ring::after{opacity:1}
   font-family:var(--sans);font-weight:200;font-size:13px;color:var(--dim);
 }
 
-/* ── about strip ───────────────────────────── */
+/* ── about strip ───────────────────────────────────────────── */
 .about-strip{
   padding:80px var(--pad) 100px;
   display:grid;grid-template-columns:1fr 1fr;gap:80px;
@@ -220,7 +220,7 @@ body.chover .cur-ring::after{opacity:1}
 }
 .about-strip .series-txt p+p{margin-top:14px}
 
-/* ── SEO strip (discreet) ──────────────────── */
+/* ── SEO strip (discreet) ────────────────────────────────── */
 .seo-strip{
   max-width:760px;
   margin:120px auto 0;
@@ -252,7 +252,7 @@ body.chover .cur-ring::after{opacity:1}
   .seo-strip .seo-body{font-size:12px;line-height:1.75}
 }
 
-/* ── footer ────────────────────────────────── */
+/* ── footer ──────────────────────────────────────────────── */
 footer{
   padding:28px var(--pad);border-top:1px solid var(--line);
   display:flex;justify-content:space-between;align-items:center;
@@ -281,7 +281,7 @@ footer .next-series:hover{gap:18px}
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-4KBSVF3YMD');
+  gtag('config', 'G-4KBSVF3YMD', { 'anonymize_ip': true, 'client_storage': 'none' });
 </script>
 </head>
 <body>
@@ -363,7 +363,7 @@ footer .next-series:hover{gap:18px}
 </footer>
 
 <script>
-/* ── helpers ─────────────────────────────────── */
+/* ── helpers ─────────────────────────────────────────────── */
 function optBase(src) {
   return src.replace('uploads/', 'uploads/opt/').replace(/\.jpg$/i, '');
 }
@@ -376,7 +376,7 @@ function picHTML(src, alt, sizes, extra='') {
   </picture>`;
 }
 
-/* ── build page from data ────────────────────── */
+/* ── build page from data ──────────────────────────────────────── */
 function buildPage(allSeries) {
   const pathMatch = location.pathname.match(/\/series\/(japan|lanzarote|elsewhere)/i);
   const key = (pathMatch ? pathMatch[1] : new URLSearchParams(location.search).get('s') || Object.keys(allSeries)[0]).toLowerCase();
@@ -528,13 +528,13 @@ function buildPage(allSeries) {
   });
 }
 
-/* ── fetch data.json and init ────────────────── */
+/* ── fetch data.json and init ────────────────────────────────────── */
 fetch('data.json')
   .then(r => r.json())
   .then(data => buildPage(data.series))
   .catch(() => console.error('Impossible de charger data.json'));
 
-/* ── cursor ──────────────────────────────────── */
+/* ── cursor ────────────────────────────────────────────────── */
 const dot=document.getElementById('cur-dot');
 const ring=document.getElementById('cur-ring');
 if(!matchMedia('(pointer:coarse)').matches){
@@ -543,7 +543,7 @@ if(!matchMedia('(pointer:coarse)').matches){
   (function tick(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(tick); })();
 }
 
-/* ── load ────────────────────────────────────── */
+/* ── load ──────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded',()=>document.body.classList.add('loaded'));
 </script>
 </body>

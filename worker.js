@@ -4,8 +4,8 @@ const SECURITY_HEADERS = {
     "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; " +
     "img-src 'self' data: https://www.google-analytics.com; " +
     "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com; " +
-    "style-src 'self' 'unsafe-inline'; " +
-    "font-src 'self'; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+    "font-src 'self' https://fonts.gstatic.com; " +
     "frame-ancestors 'none'",
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',

@@ -82,7 +82,7 @@
 }
 </script>
 <style>
-/* ── tokens ──────────────────────────────────── */
+/* ── tokens ──────────────────────────────────────────── */
 :root{
   --bg:#0a0a0a;
   --bg2:#0f0f0f;
@@ -110,7 +110,7 @@ a{color:inherit;text-decoration:none}
 img{display:block}
 picture{display:contents}
 
-/* ── grain + vignette ────────────────────────── */
+/* ── grain + vignette ──────────────────────────────────── */
 .grain{
   position:fixed;inset:0;pointer-events:none;z-index:400;
   opacity:.052;mix-blend-mode:overlay;
@@ -121,7 +121,7 @@ picture{display:contents}
   background:radial-gradient(ellipse at center,transparent 52%,rgba(0,0,0,.5) 100%);
 }
 
-/* ── cursor ──────────────────────────────────── */
+/* ── cursor ──────────────────────────────────────────── */
 .cur-dot{
   position:fixed;width:8px;height:8px;border-radius:50%;
   background:var(--fg);pointer-events:none;z-index:500;
@@ -152,7 +152,7 @@ body.chover .cur-ring{
 }
 body.chover .cur-ring[data-label]::after{opacity:1}
 
-/* ── nav ─────────────────────────────────────── */
+/* ── nav ───────────────────────────────────────────────── */
 .nav{
   position:fixed;inset:0 0 auto 0;z-index:200;
   display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
@@ -176,7 +176,7 @@ body.chover .cur-ring[data-label]::after{opacity:1}
 }
 @keyframes pulse{0%{box-shadow:0 0 0 0 oklch(.78 .16 145/.45)}70%{box-shadow:0 0 0 8px oklch(.78 .16 145/0)}100%{box-shadow:0 0 0 0 oklch(.78 .16 145/0)}}
 
-/* ── hero ────────────────────────────────────── */
+/* ── hero ──────────────────────────────────────────────── */
 .hero{
   position:relative;height:100svh;min-height:600px;
   overflow:hidden;background:var(--bg);
@@ -228,7 +228,7 @@ body.chover .cur-ring[data-label]::after{opacity:1}
   100%{transform:scaleY(0);transform-origin:bottom;opacity:0}
 }
 
-/* ── marquee ─────────────────────────────────── */
+/* ── marquee ───────────────────────────────────────────── */
 .ticker-band{
   border-top:1px solid var(--line);border-bottom:1px solid var(--line);
   overflow:hidden;margin-top:120px;
@@ -251,7 +251,7 @@ body.chover .cur-ring[data-label]::after{opacity:1}
 @keyframes t-scroll-l{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes t-scroll-r{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 
-/* ── photo trio ─────────────────────────────── */
+/* ── photo trio ───────────────────────────────────────── */
 .photo-trio{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -298,7 +298,7 @@ body.chover .cur-ring[data-label]::after{opacity:1}
 }
 .rv.in .img-mask{transform:scaleY(0)}
 
-/* ── text block ─────────────────────────────── */
+/* ── text block ───────────────────────────────────────── */
 .text-block{
   padding:80px var(--pad) 0;
   display:grid;grid-template-columns:1fr 1fr;gap:40px 80px;
@@ -316,7 +316,7 @@ body.chover .cur-ring[data-label]::after{opacity:1}
   color:var(--dim);align-self:end;
 }
 
-/* ── series panels ───────────────────────────── */
+/* ── series panels ─────────────────────────────────────────── */
 .series-panels{padding:140px 0 0}
 .series-panels-head{
   padding:40px var(--pad) 56px;
@@ -372,7 +372,7 @@ body.chover .cur-ring[data-label]::after{opacity:1}
 }
 .serie-cta:hover{background:var(--fg);color:var(--bg);border-color:var(--fg)}
 
-/* ── about ───────────────────────────────────── */
+/* ── about ───────────────────────────────────────────────── */
 .about{
   padding:160px var(--pad) 140px;
   display:grid;grid-template-columns:1fr 1fr;gap:80px;
@@ -396,7 +396,7 @@ body.chover .cur-ring[data-label]::after{opacity:1}
 }
 .about-meta .k{color:var(--dim)}.about-meta .v{color:var(--fg)}
 
-/* ── footer ──────────────────────────────────── */
+/* ── footer ────────────────────────────────────────────────── */
 footer{
   padding:36px var(--pad) 32px;border-top:1px solid var(--line);
   display:grid;grid-template-columns:1fr 1fr 1fr;align-items:end;gap:20px;
@@ -414,13 +414,13 @@ footer .lk a{
 footer .lk a:hover{opacity:.55}
 footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);text-align:right}
 
-/* ── reveal ──────────────────────────────────── */
+/* ── reveal ──────────────────────────────────────────────── */
 .rv{opacity:0;transform:translateY(22px);
   transition:opacity 1200ms cubic-bezier(.22,.61,.36,1),transform 1200ms cubic-bezier(.22,.61,.36,1)}
 .rv.in{opacity:1;transform:none}
 .rv-d1{transition-delay:100ms}.rv-d2{transition-delay:220ms}
 
-/* ── mobile ──────────────────────────────────── */
+/* ── mobile ──────────────────────────────────────────────── */
 @media(max-width:860px){
   .hero-photo{width:100%;opacity:.55}
   .hero-shade{width:100%;background:linear-gradient(to top,var(--bg) 10%,rgba(10,10,10,.3) 60%,transparent)}
@@ -444,7 +444,7 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-4KBSVF3YMD');
+  gtag('config', 'G-4KBSVF3YMD', { 'anonymize_ip': true, 'client_storage': 'none' });
 </script>
 </head>
 <body>
@@ -454,7 +454,7 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
 <div class="cur-dot" id="cur-dot"></div>
 <div class="cur-ring" id="cur-ring" data-label="View"></div>
 
-<!-- ── Nav ──────────────────────────────────── -->
+<!-- ── Nav ────────────────────────────────────────────── -->
 <nav class="nav">
   <a href="/" class="brand" aria-label="Interlude — home">Interlude</a>
   <ul>
@@ -466,7 +466,7 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
   <div class="avail"><span class="dot-live"></span>Available &mdash; 2026</div>
 </nav>
 
-<!-- ── Hero ─────────────────────────────────── -->
+<!-- ── Hero ─────────────────────────────────────────────── -->
 <header id="top" class="hero">
   <div class="hero-photo">
     <picture>
@@ -485,7 +485,7 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
   <div class="hero-scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
 </header>
 
-<!-- ── Ticker band ───────────────────────── -->
+<!-- ── Ticker band ──────────────────────────────────────────── -->
 <div class="ticker-band">
   <div class="ticker-row">
     <div class="ticker-inner t-left">
@@ -495,13 +495,13 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
   </div>
   <div class="ticker-row">
     <div class="ticker-inner t-right">
-      <span>35°39’N 139°44’E &mdash; 29°01’N 13°33’W &mdash; 48°51’N 2°21’E &mdash; 40°42’N 74°00’W &mdash; 59°54’N 10°44’E &mdash; 47°21’N 2°52’W &mdash; 51°30’N 0°07’W &mdash; 54°41’N 25°17’E &mdash; 28°57’N 13°36’W &mdash;</span>
-      <span>35°39’N 139°44’E &mdash; 29°01’N 13°33’W &mdash; 48°51’N 2°21’E &mdash; 40°42’N 74°00’W &mdash; 59°54’N 10°44’E &mdash; 47°21’N 2°52’W &mdash; 51°30’N 0°07’W &mdash; 54°41’N 25°17’E &mdash; 28°57’N 13°36’W &mdash;</span>
+      <span>35°39'N 139°44'E &mdash; 29°01'N 13°33'W &mdash; 48°51'N 2°21'E &mdash; 40°42'N 74°00'W &mdash; 59°54'N 10°44'E &mdash; 47°21'N 2°52'W &mdash; 51°30'N 0°07'W &mdash; 54°41'N 25°17'E &mdash; 28°57'N 13°36'W &mdash;</span>
+      <span>35°39'N 139°44'E &mdash; 29°01'N 13°33'W &mdash; 48°51'N 2°21'E &mdash; 40°42'N 74°00'W &mdash; 59°54'N 10°44'E &mdash; 47°21'N 2°52'W &mdash; 51°30'N 0°07'W &mdash; 54°41'N 25°17'E &mdash; 28°57'N 13°36'W &mdash;</span>
     </div>
   </div>
 </div>
 
-<!-- ── Photo trio ─────────────────────────────── -->
+<!-- ── Photo trio ─────────────────────────────────────────────── -->
 <section id="index" class="photo-trio">
   <a href="series/japan" class="trio-main rv" data-slot="0" data-sizes="55vw" data-current="JAPO0231" style="transition-delay:0ms">
     <picture class="is-active">
@@ -525,13 +525,13 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
   </a>
 </section>
 
-<!-- ── Text block ────────────────────────────── -->
+<!-- ── Text block ────────────────────────────────────────────── -->
 <div class="text-block rv">
   <p class="text-lead">Seven years. Three geographies.<br/>One continuous question about light and waiting.</p>
   <p class="text-body">Interlude is the long-term work of a documentary photographer based in Paris. Japan, Lanzarote, Elsewhere — images assembled without caption or hierarchy, as close as possible to lived time.</p>
 </div>
 
-<!-- ── Series panels ─────────────────────────── -->
+<!-- ── Series panels ───────────────────────────────────────────── -->
 <div class="series-panels" id="series">
   <div class="series-panels-head rv">
     <h2>Three<br/>series.</h2>
@@ -587,7 +587,7 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
   </a>
 </div>
 
-<!-- ── About ─────────────────────────────────── -->
+<!-- ── About ────────────────────────────────────────────────── -->
 <section id="about" class="about rv">
   <div class="quote">
     &ldquo;The photograph already exists before you press the shutter. You just have to find it.&rdquo;
@@ -604,7 +604,7 @@ footer .copy{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-tra
   </div>
 </section>
 
-<!-- ── Footer ────────────────────────────────── -->
+<!-- ── Footer ────────────────────────────────────────────────── -->
 <footer id="contact">
   <div class="mark">Interlude</div>
   <div class="links">
@@ -669,7 +669,7 @@ const TRIO_POOL = [
   { base:'site-1-21',   place:'JR Conductor · White gloves',      code:'JA·06', series:'japan' },
   { base:'site-1-22',   place:'Child alone · Train',              code:'JA·07', series:'japan' },
   { base:'site-1-23',   place:'Sailor · Silhouette',              code:'JA·08', series:'japan' },
-  { base:'site-1-17',   place:'Kōenji · Go',                 code:'JA·09', series:'japan' },
+  { base:'site-1-17',   place:'Kōenji · Go',                      code:'JA·09', series:'japan' },
   { base:'site-1-24',   place:'Station master · Interstitial',    code:'JA·10', series:'japan' },
   { base:'site-1-25',   place:'JR Agent · Platform',              code:'JA·11', series:'japan' },
   { base:'site-1-26',   place:'Red coat · Shibuya',               code:'JA·12', series:'japan' },
@@ -680,24 +680,24 @@ const TRIO_POOL = [
   { base:'site-1-9',    place:'Palmiers · Volcans',               code:'LZ·01', series:'lanzarote' },
   { base:'site-1-32',   place:'Route sur la lave · Timanfaya',    code:'LZ·02', series:'lanzarote' },
   { base:'site-1-4',    place:'Caleta de Famara · Panier',        code:'LZ·03', series:'lanzarote' },
-  { base:'site-1-6',    place:'L’agriculteur · Tracteur',    code:'LZ·04', series:'lanzarote' },
+  { base:'site-1-6',    place:'L’agriculteur · Tracteur',         code:'LZ·04', series:'lanzarote' },
   { base:'site-1-5',    place:'Surfeur · Volcans',                code:'LZ·05', series:'lanzarote' },
-  { base:'site-1-7',    place:'Porte en bois · Double exposition',code:'LZ·06', series:'lanzarote' },
+  { base:'site-1-7',    place:'Porte en bois · Double exposition', code:'LZ·06', series:'lanzarote' },
   { base:'site-1-8',    place:'Agaves dans la fumée',             code:'LZ·07', series:'lanzarote' },
   { base:'site-1-10',   place:'Double exposition · Lanzarote',    code:'LZ·08', series:'lanzarote' },
-  { base:'site-1-3',    place:'Hoëdic · Calvaire',           code:'EW·01', series:'elsewhere' },
-  { base:'NY2025-15-1', place:'Hoëdic · Le saut',            code:'EW·02', series:'elsewhere' },
-  { base:'NY2025-27-1', place:'Hoëdic · Après la baignade', code:'EW·03', series:'elsewhere' },
-  { base:'NY2025-11-1', place:'Hoëdic · Lumière dorée', code:'EW·04', series:'elsewhere' },
+  { base:'site-1-3',    place:'Hoëdic · Calvaire',               code:'EW·01', series:'elsewhere' },
+  { base:'NY2025-15-1', place:'Hoëdic · Le saut',               code:'EW·02', series:'elsewhere' },
+  { base:'NY2025-27-1', place:'Hoëdic · Après la baignade',     code:'EW·03', series:'elsewhere' },
+  { base:'NY2025-11-1', place:'Hoëdic · Lumière dorée',         code:'EW·04', series:'elsewhere' },
   { base:'site-1-12',   place:'Paris · Seine en crue',            code:'EW·05', series:'elsewhere' },
   { base:'site-1',      place:'NYC · Hot-dogs de nuit',           code:'EW·06', series:'elsewhere' },
   { base:'site-1-11',   place:'NYC · Basketball court',           code:'EW·07', series:'elsewhere' },
   { base:'site-1-30',   place:'Portrait urbain · Rideau de fer',  code:'EW·08', series:'elsewhere' },
-  { base:'site-1-2',    place:'Oslo · Jetée enneigée',  code:'EW·09', series:'elsewhere' },
+  { base:'site-1-2',    place:'Oslo · Jetée enneigée',           code:'EW·09', series:'elsewhere' },
   { base:'site-1-16',   place:'Surfeurs · Contre-jour',           code:'EW·10', series:'elsewhere' },
   { base:'site-1-13',   place:'Londres · Ouvriers',               code:'EW·11', series:'elsewhere' },
-  { base:'site-1-31',   place:'Vitre givrée · Portrait',     code:'EW·12', series:'elsewhere' },
-  { base:'site-1-14',   place:'Lituanie · Dans l’eau',       code:'EW·13', series:'elsewhere' }
+  { base:'site-1-31',   place:'Vitre givrée · Portrait',          code:'EW·12', series:'elsewhere' },
+  { base:'site-1-14',   place:'Lituanie · Dans l’eau',            code:'EW·13', series:'elsewhere' }
 ];
 const TRIO_INTERVALS = [3000, 4000];
 function trioPicHTML(item, sizes) {
